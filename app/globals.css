@@ -1,0 +1,353 @@
+@import "tailwindcss";
+
+/*
+  EzyEV design tokens.
+  Light is the default theme. Dark is opt in through the nav toggle,
+  which sets data-theme="dark" on <html>. Dark surfaces use the approved dark palette.
+  Lime is the brand fill (from the current ezyev.in build); "accent" is the
+  readable text and icon version of it for each theme.
+*/
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Light (default) */
+  --color-base: #ffffff;
+  --color-surface: #f6f6f3;
+  --color-raised: #eeeeea;
+  --color-hover: #e5e5e0;
+  --color-line: #e0e0da;
+  --color-olive: #f3f8e8;
+  --color-stage: #131209;
+
+  --color-fg: #000000;
+  --color-muted: #555555;
+  --color-subtle: #767676;
+  --color-accent: #13803f; /* logo green */
+  --color-danger: #b42318;
+
+  --color-heading-from: #000000;
+  --color-heading-to: #666666;
+
+  /* Same in both themes */
+  --color-lime: #b1e346;
+  --color-lime-bright: #c4f241;
+  --color-ink: #000000;
+  --color-white: #ffffff;
+  --color-night: #131209;
+  --color-logo-green: #13803f;
+  --color-logo-yellow: #f7c51a;
+
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --color-base: #000000;
+  --color-surface: #181818;
+  --color-raised: #1f1f1f;
+  --color-hover: #272727;
+  --color-line: #313131;
+  --color-olive: #131209;
+  --color-stage: #181818;
+
+  --color-fg: #ffffff;
+  --color-muted: #9b9b9b;
+  --color-subtle: #7a7a7a;
+  --color-accent: #b1e346;
+  --color-danger: #ff8a7a;
+
+  --color-heading-from: #ffffff;
+  --color-heading-to: #9b9b9b;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--color-base);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  p, li, dd, summary, label {
+    text-wrap: pretty;
+  }
+
+  em, i, cite {
+    font-style: normal;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Hero heading: the one place a gradient is allowed, on text only. */
+  .hero-heading {
+    background-image: linear-gradient(90deg, var(--color-heading-from) 0%, var(--color-heading-to) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 9999px;
+    background: var(--color-lime);
+    color: var(--color-ink);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    transition: background-color 300ms var(--ease-brand), transform 500ms var(--ease-brand);
+  }
+  .btn-primary:hover {
+    background: var(--color-lime-bright);
+    transform: translateY(-2px);
+  }
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+  .btn-primary[disabled],
+  .btn-primary[aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 9999px;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    color: var(--color-fg);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    transition: background-color 300ms var(--ease-brand), transform 500ms var(--ease-brand);
+  }
+  .btn-secondary:hover {
+    background: var(--color-hover);
+    transform: translateY(-2px);
+  }
+  .btn-secondary:active {
+    transform: scale(0.98);
+  }
+
+  /* Section label with the bolt from the EzyEV logo in front of it */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 12px;
+    height: 16px;
+    flex-shrink: 0;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 16'%3E%3Cpath d='M7.5 0 1 9h4.2L3.8 16 11 6.6H6.6L7.5 0Z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 16'%3E%3Cpath d='M7.5 0 1 9h4.2L3.8 16 11 6.6H6.6L7.5 0Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  .card {
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    border-radius: 1.5rem;
+  }
+
+  .field {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-raised);
+    padding: 8px 12px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--color-fg);
+    transition: border-color 300ms var(--ease-brand), background-color 300ms var(--ease-brand);
+  }
+  .field::placeholder {
+    color: var(--color-subtle);
+  }
+  .field:hover {
+    background: var(--color-hover);
+  }
+  .field:focus-visible {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-danger);
+  }
+
+  .skeleton {
+    display: inline-block;
+    border-radius: 0.5rem;
+    background: var(--color-hover);
+    animation: skeleton-pulse 1600ms var(--ease-brand) infinite alternate;
+  }
+}
+
+@keyframes skeleton-pulse {
+  from { opacity: 0.45; }
+  to { opacity: 1; }
+}
+
+/* Scroll reveal. Only hidden when JS is running, so content never disappears without it. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 700ms var(--ease-brand), transform 700ms var(--ease-brand);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Page transition curtain: parked below the viewport until a navigation starts */
+.curtain {
+  visibility: hidden;
+  transform: translateY(calc(100% + 12vh));
+}
+.curtain-bar {
+  transform: scaleX(0);
+}
+
+/* First visit of a session: the page loads behind the curtain, the battery charges, then it lifts */
+.intro .curtain {
+  visibility: visible;
+  transform: translateY(0);
+  animation: curtain-lift 800ms var(--ease-brand) 1100ms forwards;
+}
+.intro .curtain-brand {
+  animation: brand-out 400ms var(--ease-brand) 900ms forwards;
+}
+.intro .curtain-bar {
+  animation: bar-charge 900ms var(--ease-brand) 100ms forwards;
+}
+@keyframes curtain-lift {
+  to { transform: translateY(calc(-100% - 12vh)); visibility: hidden; }
+}
+@keyframes brand-out {
+  to { opacity: 0; transform: translateY(-24px); }
+}
+@keyframes bar-charge {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Footer rider: rides in from the left across the wordmark, then idles with a small bob */
+.js [data-reveal].footer-rider {
+  opacity: 0;
+  transform: translateX(-55vw);
+  transition: opacity 600ms var(--ease-brand), transform 1600ms var(--ease-brand);
+}
+.js [data-reveal].footer-rider.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.footer-rider-bob {
+  animation: rider-bob 900ms var(--ease-brand) infinite alternate;
+}
+@keyframes rider-bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-4px); }
+}
+
+/* Theme switch: change every color in one frame */
+.theme-switching,
+.theme-switching * {
+  transition: none !important;
+}
+
+/* Mobile menu links arrive one after another */
+.menu-item {
+  animation: menu-in 500ms var(--ease-brand) both;
+}
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Tagline reveal words */
+.tagline-word {
+  color: color-mix(in srgb, var(--color-fg) 30%, transparent);
+  transition: color 500ms var(--ease-brand);
+}
+.tagline-word.is-active {
+  color: var(--color-fg);
+}
+
+/* FAQ accordion */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details .faq-icon {
+  transition: transform 500ms var(--ease-brand);
+}
+details[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    transform: none;
+    transition: opacity 700ms var(--ease-brand);
+  }
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: none;
+  }
+  .skeleton {
+    animation: none;
+  }
+  .menu-item {
+    animation-name: menu-fade;
+  }
+  .js [data-reveal].footer-rider {
+    transform: none;
+  }
+  .footer-rider-bob {
+    animation: none;
+  }
+}
+
+@keyframes menu-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
