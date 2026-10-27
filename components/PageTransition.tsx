@@ -53,7 +53,7 @@ export function PageTransition() {
     );
     brand.animate(
       [
-        { opacity: 0, transform: still ? "none" : "translateY(24px) scale(0.9)" },
+        { opacity: 0, transform: still ? "none" : "translateY(1.5rem) scale(0.9)" },
         { opacity: 1, transform: "none" },
       ],
       { duration: 500, delay: still ? 0 : COVER_MS - 300, easing: EASE, fill: "both" },
@@ -89,7 +89,7 @@ export function PageTransition() {
     brand.animate(
       [
         { opacity: 1, transform: "none" },
-        { opacity: 0, transform: still ? "none" : "translateY(-24px)" },
+        { opacity: 0, transform: still ? "none" : "translateY(-1.5rem)" },
       ],
       { duration: 400, delay: 250, easing: EASE, fill: "forwards" },
     );

@@ -143,7 +143,7 @@ export default function ProductPage() {
                 alt={o.image.alt}
                 width={o.image.w}
                 height={o.image.h}
-                sizes="(min-width: 768px) 560px, 100vw"
+                sizes="(min-width: 768px) 45vw, 100vw"
                 className="h-auto w-full"
               />
             </div>
@@ -162,7 +162,7 @@ export default function ProductPage() {
           {swapFlow.map((s, i) => (
             <li key={s.title} data-reveal className="card p-6">
               <div className="flex items-center justify-between">
-                <s.icon size={32} aria-hidden className="text-accent" />
+                <s.icon size="2rem" aria-hidden className="text-accent" />
                 <span className="font-mono text-sm text-subtle">0{i + 1}</span>
               </div>
               <h3 className="mt-6 text-lg font-semibold">{s.title}</h3>
@@ -183,11 +183,11 @@ export default function ProductPage() {
               />
               <ul data-reveal className="mt-8 flex flex-col gap-3 text-muted">
                 <li className="flex gap-3">
-                  <ShieldCheck size={24} weight="fill" aria-hidden className="shrink-0 text-accent" />
+                  <ShieldCheck size="1.5rem" weight="fill" aria-hidden className="shrink-0 text-accent" />
                   Every battery validated before it is released
                 </li>
                 <li className="flex gap-3">
-                  <ClockCountdown size={24} weight="fill" aria-hidden className="shrink-0 text-accent" />
+                  <ClockCountdown size="1.5rem" weight="fill" aria-hidden className="shrink-0 text-accent" />
                   Live state of charge for every slot, every station
                 </li>
               </ul>
@@ -195,7 +195,7 @@ export default function ProductPage() {
             <ul className="grid gap-2 sm:grid-cols-2 md:col-span-7">
               {platform.map((p) => (
                 <li key={p.title} data-reveal className="rounded-2xl bg-raised p-6">
-                  <p.icon size={24} aria-hidden className="text-accent" />
+                  <p.icon size="1.5rem" aria-hidden className="text-accent" />
                   <h3 className="mt-4 font-semibold">{p.title}</h3>
                   <p className="mt-1 text-sm text-muted">{p.body}</p>
                 </li>

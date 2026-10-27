@@ -116,7 +116,7 @@ export default function WhatWeDoPage() {
               alt="An EzyEV swap station in a city with a delivery rider arriving"
               width={2187}
               height={1588}
-              sizes="(min-width: 768px) 560px, 100vw"
+              sizes="(min-width: 768px) 45vw, 100vw"
               className="h-auto w-full"
             />
           </div>
@@ -146,7 +146,7 @@ export default function WhatWeDoPage() {
         <div className="grid gap-4 md:grid-cols-3">
           {purpose.map((p) => (
             <article key={p.title} data-reveal className="card p-8">
-              <p.icon size={32} aria-hidden className="text-accent" />
+              <p.icon size="2rem" aria-hidden className="text-accent" />
               <h2 className="mt-6 text-2xl font-semibold">{p.title}</h2>
               <p className="mt-3 text-muted">{p.body}</p>
             </article>
@@ -167,7 +167,7 @@ export default function WhatWeDoPage() {
               data-reveal
               className="card p-8 transition-transform duration-500 ease-brand hover:-translate-y-1"
             >
-              <s.icon size={32} aria-hidden className="text-accent" />
+              <s.icon size="2rem" aria-hidden className="text-accent" />
               <h3 className="mt-6 text-xl font-semibold">{s.title}</h3>
               <p className="mt-2 text-muted">{s.body}</p>
             </article>
@@ -191,7 +191,7 @@ export default function WhatWeDoPage() {
             {values.map((v) => (
               <li key={v.title} data-reveal className="card flex gap-6 p-6">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-raised">
-                  <v.icon size={24} aria-hidden className="text-accent" />
+                  <v.icon size="1.5rem" aria-hidden className="text-accent" />
                 </span>
                 <div>
                   <h3 className="text-lg font-semibold">{v.title}</h3>

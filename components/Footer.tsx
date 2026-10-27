@@ -134,7 +134,7 @@ export function Footer() {
               alt=""
               width={560}
               height={550}
-              sizes="160px"
+              sizes="(min-width: 1440px) 14vw, 160px"
               className="footer-rider-bob h-auto w-full"
             />
           </div>

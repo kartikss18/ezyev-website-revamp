@@ -35,7 +35,7 @@ export function SectionHeading({
 }) {
   const centered = align === "center";
   return (
-    <div data-reveal className={`max-w-[680px] ${centered ? "mx-auto text-center" : ""}`}>
+    <div data-reveal className={`max-w-[42.5rem] ${centered ? "mx-auto text-center" : ""}`}>
       <p className="eyebrow">{eyebrow}</p>
       <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
       {intro && <p className="mt-4 text-lg text-muted">{intro}</p>}
@@ -59,10 +59,10 @@ export function PageHero({
     <section className="px-4 pt-24 pb-16 md:pb-20">
       <div className="mx-auto max-w-6xl pt-12 text-center">
         <p className="eyebrow">{eyebrow}</p>
-        <h1 className="hero-heading mx-auto mt-4 max-w-[680px] text-4xl font-semibold tracking-tight md:text-5xl">
+        <h1 className="hero-heading mx-auto mt-4 max-w-[42.5rem] text-4xl font-semibold tracking-tight md:text-5xl">
           {title}
         </h1>
-        <p className="mx-auto mt-6 max-w-[680px] text-lg text-muted">{intro}</p>
+        <p className="mx-auto mt-6 max-w-[42.5rem] text-lg text-muted">{intro}</p>
         {children}
       </div>
     </section>
@@ -74,7 +74,7 @@ export function PrimaryCta({ label = site.primaryCta.label }: { label?: string }
     <Link href={site.primaryCta.href} className="btn-primary group">
       {label}
       <ArrowRight
-        size={18}
+        size="1.125rem"
         weight="bold"
         aria-hidden
         className="transition-transform duration-500 ease-brand group-hover:translate-x-1"
@@ -88,7 +88,7 @@ export function CheckList({ items }: { items: readonly string[] }) {
     <ul className="flex flex-col gap-3">
       {items.map((item) => (
         <li key={item} className="flex gap-3 text-muted">
-          <CheckCircle size={24} weight="fill" aria-hidden className="shrink-0 text-accent" />
+          <CheckCircle size="1.5rem" weight="fill" aria-hidden className="shrink-0 text-accent" />
           <span>{item}</span>
         </li>
       ))}
@@ -106,7 +106,7 @@ export function FaqList({ items }: { items: readonly { q: string; a: string }[] 
         >
           <summary className="flex cursor-pointer items-center justify-between gap-4 rounded-2xl p-6 text-lg font-semibold">
             {item.q}
-            <Plus size={20} weight="bold" aria-hidden className="faq-icon shrink-0 text-accent" />
+            <Plus size="1.25rem" weight="bold" aria-hidden className="faq-icon shrink-0 text-accent" />
           </summary>
           <p className="px-6 pb-6 text-muted">{item.a}</p>
         </details>
@@ -135,8 +135,8 @@ export function CtaBand({
         className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-lime p-8 text-ink md:p-16"
       >
         <BrandWatermark />
-        <h2 className="relative max-w-[680px] text-3xl font-semibold tracking-tight md:text-5xl">{title}</h2>
-        <p className="relative mt-6 max-w-[680px] text-lg text-ink/70">{body}</p>
+        <h2 className="relative max-w-[42.5rem] text-3xl font-semibold tracking-tight md:text-5xl">{title}</h2>
+        <p className="relative mt-6 max-w-[42.5rem] text-lg text-ink/70">{body}</p>
         <div className="relative mt-8 flex flex-wrap items-center gap-4">
           <Link
             href={site.primaryCta.href}
@@ -144,7 +144,7 @@ export function CtaBand({
           >
             {site.primaryCta.label}
             <ArrowRight
-              size={18}
+              size="1.125rem"
               weight="bold"
               aria-hidden
               className="transition-transform duration-500 ease-brand group-hover:translate-x-1"

@@ -107,11 +107,11 @@ export default function HomePage() {
       <section className="px-4 pt-24 pb-12">
         <div className="mx-auto max-w-6xl pt-12 text-center">
           <p className="eyebrow">Battery as a Service for 2W and 3W fleets</p>
-          <h1 className="hero-heading mx-auto mt-4 max-w-[680px] text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h1 className="hero-heading mx-auto mt-4 max-w-[42.5rem] text-4xl font-semibold tracking-tight sm:text-5xl">
             60 second battery swaps
             <br className="max-sm:hidden" /> for India&apos;s EV fleets
           </h1>
-          <p className="mx-auto mt-6 max-w-[680px] text-lg text-muted">
+          <p className="mx-auto mt-6 max-w-[42.5rem] text-lg text-muted">
             EzyEV leases the battery and runs the swap network, so your delivery riders never wait at a
             charger. Buy each vehicle for up to 40% less and pay one fixed monthly plan.
           </p>
@@ -130,7 +130,7 @@ export default function HomePage() {
             width={2187}
             height={1588}
             priority
-            sizes="(min-width: 896px) 896px, 100vw"
+            sizes="(min-width: 896px) 70vw, 100vw"
             className="h-auto w-full"
           />
         </div>
@@ -153,7 +153,7 @@ export default function HomePage() {
         <div className="mt-12 grid gap-4 md:grid-cols-2">
           <div data-reveal className="card p-8">
             <div className="flex items-center gap-3">
-              <Plugs size={24} aria-hidden className="text-subtle" />
+              <Plugs size="1.5rem" aria-hidden className="text-subtle" />
               <h3 className="text-xl font-semibold text-muted">Charging your own batteries</h3>
             </div>
             <ul className="mt-6 flex flex-col gap-4">
@@ -164,7 +164,7 @@ export default function HomePage() {
                 "You find out about battery health when a rider is stranded",
               ].map((t) => (
                 <li key={t} className="flex gap-3 text-muted">
-                  <XCircle size={24} aria-hidden className="shrink-0 text-subtle" />
+                  <XCircle size="1.5rem" aria-hidden className="shrink-0 text-subtle" />
                   {t}
                 </li>
               ))}
@@ -172,7 +172,7 @@ export default function HomePage() {
           </div>
           <div data-reveal className="rounded-3xl border border-accent/40 bg-olive p-8">
             <div className="flex items-center gap-3">
-              <Lightning size={24} weight="fill" aria-hidden className="text-accent" />
+              <Lightning size="1.5rem" weight="fill" aria-hidden className="text-accent" />
               <h3 className="text-xl font-semibold">Swapping with EzyEV</h3>
             </div>
             <ul className="mt-6 flex flex-col gap-4">
@@ -183,7 +183,7 @@ export default function HomePage() {
                 "Live battery health and swap history for every vehicle",
               ].map((t) => (
                 <li key={t} className="flex gap-3">
-                  <CheckCircle size={24} weight="fill" aria-hidden className="shrink-0 text-accent" />
+                  <CheckCircle size="1.5rem" weight="fill" aria-hidden className="shrink-0 text-accent" />
                   {t}
                 </li>
               ))}
@@ -202,7 +202,7 @@ export default function HomePage() {
         <div className="mt-12 grid gap-4 md:grid-cols-6">
           <article data-reveal className="card grid gap-6 overflow-hidden p-2 md:col-span-6 md:grid-cols-2">
             <div className="flex flex-col justify-center p-6 md:p-10">
-              <CurrencyInr size={32} aria-hidden className="text-accent" />
+              <CurrencyInr size="2rem" aria-hidden className="text-accent" />
               <h3 className="mt-6 text-3xl font-semibold tracking-tight">Up to 40% lower vehicle cost</h3>
               <p className="mt-4 text-lg text-muted">
                 The battery is the most expensive part of an EV. Buy the vehicle without it, lease the battery
@@ -215,7 +215,7 @@ export default function HomePage() {
                 alt="A rider celebrates next to a large rupee banknote, showing lower vehicle cost"
                 width={1221}
                 height={973}
-                sizes="(min-width: 768px) 560px, 100vw"
+                sizes="(min-width: 768px) 45vw, 100vw"
                 className="h-auto w-full max-w-md"
               />
             </div>
@@ -226,7 +226,7 @@ export default function HomePage() {
               data-reveal
               className="card p-8 transition-transform duration-500 ease-brand hover:-translate-y-1 md:col-span-3"
             >
-              <b.icon size={32} aria-hidden className="text-accent" />
+              <b.icon size="2rem" aria-hidden className="text-accent" />
               <h3 className="mt-6 text-xl font-semibold">{b.title}</h3>
               <p className="mt-2 text-muted">{b.body}</p>
             </article>
@@ -272,7 +272,7 @@ export default function HomePage() {
               alt="An EzyEV attendant carries a charged battery from a swap station to a rider"
               width={1713}
               height={1462}
-              sizes="(min-width: 768px) 560px, 100vw"
+              sizes="(min-width: 768px) 45vw, 100vw"
               className="h-auto w-full"
             />
           </div>
@@ -300,7 +300,7 @@ export default function HomePage() {
               <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-fg">
                 See how it works
                 <ArrowUpRight
-                  size={16}
+                  size="1rem"
                   weight="bold"
                   aria-hidden
                   className="transition-transform duration-500 ease-brand group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -320,7 +320,7 @@ export default function HomePage() {
             <ul className="mt-8 grid flex-1 grid-cols-2 gap-2">
               {segments.map((s) => (
                 <li key={s.label} className="flex flex-col rounded-2xl bg-raised p-4">
-                  <s.icon size={24} aria-hidden className="text-accent" />
+                  <s.icon size="1.5rem" aria-hidden className="text-accent" />
                   <span className="mt-6 font-semibold">{s.label}</span>
                   <span className="mt-1 text-sm text-muted">{s.body}</span>
                 </li>
@@ -333,7 +333,7 @@ export default function HomePage() {
             <ul className="mt-8 flex flex-col gap-2">
               {offices.map((o) => (
                 <li key={o.city} className="flex items-start gap-4 rounded-2xl bg-raised p-4">
-                  <MapPin size={24} weight="fill" aria-hidden className="shrink-0 text-accent" />
+                  <MapPin size="1.5rem" weight="fill" aria-hidden className="shrink-0 text-accent" />
                   <div>
                     <p className="font-semibold">
                       {o.city} <span className="text-sm font-normal text-subtle">{o.tag}</span>

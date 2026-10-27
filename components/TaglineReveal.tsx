@@ -30,12 +30,12 @@ export function TaglineReveal({ lines }: { lines: string[] }) {
   let index = 0;
   return (
     <section aria-label="What EzyEV promises" className="px-4 py-24">
-      <div className="mx-auto mb-8 max-w-[680px]">
+      <div className="mx-auto mb-8 max-w-[42.5rem]">
         <Image src="/images/ezyev-mark.png" alt="" width={56} height={56} className="size-12" />
       </div>
       <h2
         ref={ref}
-        className="mx-auto max-w-[680px] text-4xl font-semibold tracking-tight md:text-5xl"
+        className="mx-auto max-w-[42.5rem] text-4xl font-semibold tracking-tight md:text-5xl"
       >
         {lines.map((line, li) => (
           <span key={li} className="block">

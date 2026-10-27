@@ -41,7 +41,7 @@ export function ThemeToggle() {
       className="relative flex size-10 items-center justify-center overflow-hidden rounded-full bg-raised text-fg transition-colors duration-300 ease-brand hover:bg-hover active:scale-[0.98]"
     >
       <Sun
-        size={20}
+        size="1.25rem"
         weight="bold"
         aria-hidden
         className={`absolute transition-[translate,rotate,opacity] duration-500 ease-brand ${
@@ -49,7 +49,7 @@ export function ThemeToggle() {
         }`}
       />
       <Moon
-        size={20}
+        size="1.25rem"
         weight="bold"
         aria-hidden
         className={`absolute transition-[translate,rotate,opacity] duration-500 ease-brand ${

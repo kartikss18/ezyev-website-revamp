@@ -39,7 +39,7 @@ export default function ContactPage() {
               className="card group flex items-center gap-4 p-6 transition-colors duration-300 ease-brand hover:bg-raised active:scale-[0.98]"
             >
               <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-raised group-hover:bg-hover">
-                <EnvelopeSimple size={24} aria-hidden className="text-accent" />
+                <EnvelopeSimple size="1.5rem" aria-hidden className="text-accent" />
               </span>
               <span>
                 <span className="block text-sm text-muted">Email us</span>
@@ -51,7 +51,7 @@ export default function ContactPage() {
               className="card group flex items-center gap-4 p-6 transition-colors duration-300 ease-brand hover:bg-raised active:scale-[0.98]"
             >
               <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-raised group-hover:bg-hover">
-                <Phone size={24} aria-hidden className="text-accent" />
+                <Phone size="1.5rem" aria-hidden className="text-accent" />
               </span>
               <span>
                 <span className="block text-sm text-muted">Call us</span>
@@ -63,7 +63,7 @@ export default function ContactPage() {
               <ul className="mt-4 flex flex-col gap-6">
                 {offices.map((o) => (
                   <li key={o.city} className="flex gap-3">
-                    <MapPin size={20} weight="fill" aria-hidden className="mt-0.5 shrink-0 text-accent" />
+                    <MapPin size="1.25rem" weight="fill" aria-hidden className="mt-0.5 shrink-0 text-accent" />
                     <div>
                       <p className="font-semibold">
                         {o.city} <span className="text-sm font-normal text-subtle">{o.tag}</span>

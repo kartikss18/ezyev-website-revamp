@@ -79,7 +79,7 @@ export function ContactForm() {
   if (status.kind === "sent") {
     return (
       <div role="status" className="flex flex-col items-start rounded-2xl bg-raised p-8">
-        <CheckCircle size={40} weight="fill" aria-hidden className="text-accent" />
+        <CheckCircle size="2.5rem" weight="fill" aria-hidden className="text-accent" />
         <h2 className="mt-6 text-2xl font-semibold">Thanks, {values.name.trim().split(" ")[0]}. We have your details.</h2>
         <p className="mt-2 text-muted">
           Our operations team will review your fleet and reply to {status.email} with next steps and a plan outline.
@@ -167,7 +167,7 @@ export function ContactForm() {
 
       {status.kind === "failed" && (
         <p role="alert" className="flex gap-2 rounded-2xl border border-danger/40 bg-raised p-4 text-sm text-danger">
-          <WarningCircle size={20} weight="fill" aria-hidden className="shrink-0" />
+          <WarningCircle size="1.25rem" weight="fill" aria-hidden className="shrink-0" />
           {status.message}
         </p>
       )}

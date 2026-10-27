@@ -11,7 +11,7 @@ export function LegalPage({
 }) {
   return (
     <article className="px-4 pt-24 pb-24">
-      <div className="mx-auto max-w-[680px] pt-12">
+      <div className="mx-auto max-w-[42.5rem] pt-12">
         <p className="eyebrow">Legal</p>
         <h1 className="hero-heading mt-4 text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
         <p className="mt-4 text-sm text-subtle">Last updated {updated}</p>

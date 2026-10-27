@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 /*
-  One observer for the whole page. Any element with data-reveal rises 32px
+  One observer for the whole page. Any element with data-reveal rises 2rem (32px at base size)
   and fades in the first time it enters the viewport, then stays put.
 */
 export function RevealObserver() {

@@ -62,7 +62,15 @@
 }
 
 @layer base {
+  /*
+    Fluid scale for wide screens. Everything is sized in rem, so the root size scales the
+    whole design in proportion: 16px up to 1440px wide, then growing with the viewport
+    (about 21px at 1920, 28px at 2560) up to 2x at 2880px and beyond.
+    Percent bounds respect the visitor's own browser font size setting.
+    Media queries use the browser's base size, so breakpoints do not move.
+  */
   html {
+    font-size: clamp(100%, calc(100vw / 90), 200%);
     color-scheme: light;
     -webkit-tap-highlight-color: transparent;
   }
@@ -113,8 +121,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 8px 12px;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 9999px;
     background: var(--color-lime);
     color: var(--color-ink);
@@ -125,7 +133,7 @@
   }
   .btn-primary:hover {
     background: var(--color-lime-bright);
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem);
   }
   .btn-primary:active {
     transform: scale(0.98);
@@ -140,8 +148,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 8px 12px;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 9999px;
     border: 1px solid var(--color-line);
     background: var(--color-surface);
@@ -153,7 +161,7 @@
   }
   .btn-secondary:hover {
     background: var(--color-hover);
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem);
   }
   .btn-secondary:active {
     transform: scale(0.98);
@@ -163,7 +171,7 @@
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 600;
@@ -171,8 +179,8 @@
   }
   .eyebrow::before {
     content: "";
-    width: 12px;
-    height: 16px;
+    width: 0.75rem;
+    height: 1rem;
     flex-shrink: 0;
     background: currentColor;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 16'%3E%3Cpath d='M7.5 0 1 9h4.2L3.8 16 11 6.6H6.6L7.5 0Z'/%3E%3C/svg%3E") center / contain no-repeat;
@@ -190,7 +198,7 @@
     border-radius: 0.75rem;
     border: 1px solid var(--color-line);
     background: var(--color-raised);
-    padding: 8px 12px;
+    padding: 0.5rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5rem;
     color: var(--color-fg);
@@ -226,7 +234,7 @@
 /* Scroll reveal. Only hidden when JS is running, so content never disappears without it. */
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(2rem);
   transition: opacity 700ms var(--ease-brand), transform 700ms var(--ease-brand);
 }
 .js [data-reveal].is-visible {
@@ -259,7 +267,7 @@
   to { transform: translateY(calc(-100% - 12vh)); visibility: hidden; }
 }
 @keyframes brand-out {
-  to { opacity: 0; transform: translateY(-24px); }
+  to { opacity: 0; transform: translateY(-1.5rem); }
 }
 @keyframes bar-charge {
   from { transform: scaleX(0); }
@@ -281,7 +289,7 @@
 }
 @keyframes rider-bob {
   from { transform: translateY(0); }
-  to { transform: translateY(-4px); }
+  to { transform: translateY(-0.25rem); }
 }
 
 /* Theme switch: change every color in one frame */
@@ -295,7 +303,7 @@
   animation: menu-in 500ms var(--ease-brand) both;
 }
 @keyframes menu-in {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(1.5rem); }
   to { opacity: 1; transform: none; }
 }
 

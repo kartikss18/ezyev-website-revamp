@@ -74,7 +74,7 @@ export default function CareersPage() {
           <a href="#roles" className="btn-primary group">
             See open roles
             <ArrowRight
-              size={18}
+              size="1.125rem"
               weight="bold"
               aria-hidden
               className="transition-transform duration-500 ease-brand group-hover:translate-x-1"
@@ -91,7 +91,7 @@ export default function CareersPage() {
               alt="An EzyEV team member carries a charged battery to a rider"
               width={1713}
               height={1462}
-              sizes="(min-width: 768px) 560px, 100vw"
+              sizes="(min-width: 768px) 45vw, 100vw"
               className="h-auto w-full"
             />
           </div>
@@ -100,7 +100,7 @@ export default function CareersPage() {
             <ul className="mt-8 grid gap-2 sm:grid-cols-2">
               {reasons.map((r) => (
                 <li key={r.title} data-reveal className="card p-6">
-                  <r.icon size={24} aria-hidden className="text-accent" />
+                  <r.icon size="1.5rem" aria-hidden className="text-accent" />
                   <h3 className="mt-4 font-semibold">{r.title}</h3>
                   <p className="mt-1 text-sm text-muted">{r.body}</p>
                 </li>
@@ -126,10 +126,10 @@ export default function CareersPage() {
                     <h3 className="mt-2 text-2xl font-semibold tracking-tight">{role.title}</h3>
                     <ul className="mt-4 flex flex-wrap gap-2 text-sm text-muted">
                       <li className="flex items-center gap-1 rounded-full bg-surface px-3 py-1">
-                        <MapPin size={16} aria-hidden /> {role.location}
+                        <MapPin size="1rem" aria-hidden /> {role.location}
                       </li>
                       <li className="flex items-center gap-1 rounded-full bg-surface px-3 py-1">
-                        <Clock size={16} aria-hidden /> {role.type}
+                        <Clock size="1rem" aria-hidden /> {role.type}
                       </li>
                     </ul>
                     <p className="mt-6 text-muted">{role.summary}</p>
@@ -154,7 +154,7 @@ export default function CareersPage() {
         ) : (
           <div data-reveal className="card mt-12 flex flex-col items-center p-12 text-center">
             <span className="flex size-12 items-center justify-center rounded-2xl bg-raised">
-              <Briefcase size={24} aria-hidden className="text-accent" />
+              <Briefcase size="1.5rem" aria-hidden className="text-accent" />
             </span>
             <h3 className="mt-6 text-xl font-semibold">We are not hiring for a specific role today</h3>
             <p className="mt-2 max-w-md text-muted">
@@ -183,18 +183,18 @@ export default function CareersPage() {
       <section aria-label="Open application" className="px-4 py-20 md:py-24">
         <div data-reveal className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-lime p-8 text-ink md:p-16">
           <BrandWatermark />
-          <h2 className="relative max-w-[680px] text-3xl font-semibold tracking-tight md:text-5xl">
+          <h2 className="relative max-w-[42.5rem] text-3xl font-semibold tracking-tight md:text-5xl">
             Don&apos;t see your role?
             <br className="max-sm:hidden" /> Write to us anyway.
           </h2>
-          <p className="relative mt-6 max-w-[680px] text-lg text-ink/70">
+          <p className="relative mt-6 max-w-[42.5rem] text-lg text-ink/70">
             Engineers, operations people and city launch folks: tell us what you want to build at EzyEV.
           </p>
           <a
             href={applyHref("Open application")}
             className="relative mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-3 py-2 text-base font-semibold text-white transition-transform duration-500 ease-brand hover:-translate-y-0.5 focus-visible:outline-ink active:scale-[0.98]"
           >
-            <EnvelopeSimple size={18} weight="bold" aria-hidden />
+            <EnvelopeSimple size="1.125rem" weight="bold" aria-hidden />
             Send an open application
           </a>
         </div>
