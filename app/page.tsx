@@ -1,94 +1,27 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowUpRight,
-  ArrowsClockwise,
-  ChartLineUp,
-  CurrencyInr,
-  Lightning,
-  MapPin,
-  Moped,
-  Package,
-  Plugs,
-  Van,
-  Wrench,
-  XCircle,
-  CheckCircle,
-} from "@phosphor-icons/react/dist/ssr";
-import { faqs, offices } from "@/content/site";
-import { ImpactCounters, ImpactLine } from "@/components/ImpactCounters";
-import { TaglineReveal } from "@/components/TaglineReveal";
-import { CtaBand, FaqList, PrimaryCta, Section, SectionHeading } from "@/components/ui";
+  applications,
+  caseStudyPlaceholder,
+  certifications,
+  faqs,
+  hardcodedNewsPlaceholders,
+  offices,
+  packSpecs,
+  site,
+} from "@/content/site";
+import { HomeHero } from "@/components/HomeHero";
+import { BatteryAnatomySection } from "@/components/BatteryAnatomySection";
+import { EcosystemStack } from "@/components/EcosystemStack";
+import { SwapSection } from "@/components/SwapSection";
+import { InsidePackSection } from "@/components/InsidePackSection";
+import { ImpactCounters } from "@/components/ImpactCounters";
+import { ContactForm } from "@/components/ContactForm";
+import { FaqList, SectionHeading } from "@/components/ui";
+import { RollText } from "@/components/RollText";
 
 export const metadata = {
   alternates: { canonical: "/" },
 };
-
-const benefits = [
-  {
-    icon: Lightning,
-    title: "60 second swaps, any hour",
-    body: "Riders swap a drained battery for a charged one at automated stations that run 24x7. No charging queue, no idle vehicles.",
-  },
-  {
-    icon: ChartLineUp,
-    title: "One predictable monthly cost",
-    body: "Minimal upfront capex and a fixed monthly battery plan, so your cost per vehicle is known before the month starts.",
-  },
-  {
-    icon: Package,
-    title: "Live data on every battery",
-    body: "Track state of charge, battery health, energy use and routes for the whole fleet from one partner dashboard.",
-  },
-  {
-    icon: Wrench,
-    title: "Maintenance is on us",
-    body: "We charge, monitor and maintain the full battery lifecycle, with preventive checks before a battery ever lets a rider down.",
-  },
-] as const;
-
-const steps = [
-  {
-    title: "Share your fleet",
-    body: "Tell us how many vehicles you run, the models, and the kilometres each one covers in a day.",
-  },
-  {
-    title: "Get a fixed monthly plan",
-    body: "We map your routes to our stations and send a plan priced per vehicle, with no battery to buy upfront.",
-  },
-  {
-    title: "Start swapping",
-    body: "Your riders get the EzyEV app, you get the partner dashboard, and the fleet starts swapping at stations on its routes.",
-  },
-] as const;
-
-const products = [
-  {
-    anchor: "swapping",
-    name: "Battery swapping",
-    line: "60 second swaps. Zero downtime.",
-    body: "For delivery fleets that cannot afford a vehicle sitting at a charger.",
-  },
-  {
-    anchor: "leasing",
-    name: "Battery leasing",
-    line: "Own the vehicle. Lease the power.",
-    body: "For drivers and operators who want a lower vehicle price and a fixed battery bill.",
-  },
-  {
-    anchor: "retrofit",
-    name: "Retrofit kit",
-    line: "Electrify the fleet you already run.",
-    body: "For 2W and 3W operators converting existing vehicles instead of replacing them.",
-  },
-] as const;
-
-const segments = [
-  { icon: Package, label: "Last mile delivery", body: "Food, grocery and parcel riders working long shifts" },
-  { icon: Moped, label: "2W courier fleets", body: "Document and parcel runs across the city" },
-  { icon: Van, label: "Electric rickshaw operators", body: "Passenger and cargo three wheelers" },
-  { icon: ArrowsClockwise, label: "Shared mobility", body: "Rental and subscription scooter fleets" },
-] as const;
 
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -100,285 +33,467 @@ const faqJsonLd = {
   })),
 };
 
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "EzyEV Swappable Battery Pack & BaaS Platform",
+  brand: { "@type": "Brand", name: site.name },
+  description: site.description,
+  image: `${site.url}/media/product/hero-pack-2x.webp`,
+};
+
 export default function HomePage() {
   return (
     <>
       {/* 1. Hero */}
-      <section className="px-4 pt-24 pb-12">
-        <div className="mx-auto max-w-6xl pt-12 text-center">
-          <p className="eyebrow">Battery as a Service for 2W and 3W fleets</p>
-          <h1 className="hero-heading mx-auto mt-4 max-w-[42.5rem] text-4xl font-semibold tracking-tight sm:text-5xl">
-            60 second battery swaps
-            <br className="max-sm:hidden" /> for India&apos;s EV fleets
-          </h1>
-          <p className="mx-auto mt-6 max-w-[42.5rem] text-lg text-muted">
-            EzyEV leases the battery and runs the swap network, so your delivery riders never wait at a
-            charger. Buy each vehicle for up to 40% less and pay one fixed monthly plan.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <PrimaryCta />
-          </div>
-          <div className="mt-6">
-            <ImpactLine />
-          </div>
-        </div>
+      <HomeHero />
 
-        <div className="mx-auto mt-12 max-w-4xl rounded-3xl bg-stage p-8 md:p-12">
-          <Image
-            src="/images/swap-station-delivery.png"
-            alt="A delivery rider on an electric scooter pulls up to an EzyEV swap station where an attendant holds a charged battery"
-            width={2187}
-            height={1588}
-            priority
-            sizes="(min-width: 896px) 70vw, 100vw"
-            className="h-auto w-full"
-          />
+      {/* 2. Exponent-style Light Studio Battery Pack Anatomy */}
+      <BatteryAnatomySection />
+
+      {/* 3. Manifesto · Balanced Split + Urban Dusk Plate */}
+      <section aria-label="Manifesto" className="bg-surface py-20 md:py-28">
+        <div className="wrap grid items-start gap-10 lg:grid-cols-12">
+          <div className="space-y-6 lg:col-span-6">
+            <p className="eyebrow">Manifesto</p>
+            <h2 className="text-3xl leading-[1.12] font-light tracking-[-0.03em] text-fg md:text-4xl">
+              Plug-in charging sleeps overnight. Fleets don&rsquo;t.
+            </h2>
+            <p className="text-base leading-relaxed text-muted md:text-lg">
+              Every minute parked at a charger is an order lost. EzyEV turns 4-hour downtime into 60-second swaps.
+            </p>
+            <dl className="grid grid-cols-2 gap-6 border-t border-line pt-6">
+              <div>
+                <dt className="font-mono text-[11px] tracking-wider text-subtle uppercase">EzyEV swap turnaround</dt>
+                <dd className="mt-1 font-mono text-2xl font-medium text-accent tabular-nums">~60 sec</dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[11px] tracking-wider text-subtle uppercase">Conventional AC plug-in</dt>
+                <dd className="mt-1 font-mono text-2xl font-medium text-fg tabular-nums">4–6 hrs</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-line bg-ground lg:col-span-6">
+            <img
+              src="/media/lifestyle/slot1-rickshaw-v1-1x.webp"
+              srcSet="/media/lifestyle/slot1-rickshaw-v1-mobile.webp 480w, /media/lifestyle/slot1-rickshaw-v1-1x.webp 960w, /media/lifestyle/slot1-rickshaw-v1-2x.webp 1920w"
+              sizes="(min-width: 1024px) 580px, 92vw"
+              width={960}
+              height={411}
+              loading="lazy"
+              decoding="async"
+              alt="Electric three-wheeler operating along a rain-wet Indian city street at dusk"
+              className="aspect-[16/10] w-full object-cover"
+            />
+          </div>
         </div>
       </section>
 
-      {/* 2. Live proof */}
-      <Section label="Network impact" className="!pt-0">
-        <div data-reveal>
-          <ImpactCounters />
-        </div>
-      </Section>
+      {/* 3. Ecosystem: Three Pillars (Exponent-inspired Overlapping Stack) */}
+      <EcosystemStack />
 
-      {/* 3. Problem to solution */}
-      <Section label="Why swap instead of charge">
-        <SectionHeading
-          eyebrow="The problem"
-          title="Every hour at a charger is an hour without deliveries"
-          intro="Plug in charging was built for private cars that sit parked overnight. Delivery fleets run all day, and every stop to charge shows up as lost orders."
-        />
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
-          <div data-reveal className="card p-8">
-            <div className="flex items-center gap-3">
-              <Plugs size="1.5rem" aria-hidden className="text-subtle" />
-              <h3 className="text-xl font-semibold text-muted">Charging your own batteries</h3>
-            </div>
-            <ul className="mt-6 flex flex-col gap-4">
-              {[
-                "Riders wait hours at a plug instead of earning",
-                "The battery inflates the price of every vehicle you buy",
-                "A battery that degrades becomes your replacement bill",
-                "You find out about battery health when a rider is stranded",
-              ].map((t) => (
-                <li key={t} className="flex gap-3 text-muted">
-                  <XCircle size="1.5rem" aria-hidden className="shrink-0 text-subtle" />
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div data-reveal className="rounded-3xl border border-accent/40 bg-olive p-8">
-            <div className="flex items-center gap-3">
-              <Lightning size="1.5rem" weight="fill" aria-hidden className="text-accent" />
-              <h3 className="text-xl font-semibold">Swapping with EzyEV</h3>
-            </div>
-            <ul className="mt-6 flex flex-col gap-4">
-              {[
-                "A charged battery in about 60 seconds, 24x7",
-                "Buy the vehicle for up to 40% less and lease the battery",
-                "We charge, monitor and maintain every battery we hand over",
-                "Live battery health and swap history for every vehicle",
-              ].map((t) => (
-                <li key={t} className="flex gap-3">
-                  <CheckCircle size="1.5rem" weight="fill" aria-hidden className="shrink-0 text-accent" />
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Section>
+      {/* 4. The Swap (Scroll Sequence 2 + Plug-in vs Swap comparison) */}
+      <SwapSection />
 
-      {/* 4. Benefits */}
-      <Section label="Benefits">
-        <SectionHeading
-          eyebrow="What you get"
-          title="Lower vehicle cost, longer working hours"
-          intro="Five things change for an operator the week they move to EzyEV."
-        />
-        <div className="mt-12 grid gap-4 md:grid-cols-6">
-          <article data-reveal className="card grid gap-6 overflow-hidden p-2 md:col-span-6 md:grid-cols-2">
-            <div className="flex flex-col justify-center p-6 md:p-10">
-              <CurrencyInr size="2rem" aria-hidden className="text-accent" />
-              <h3 className="mt-6 text-3xl font-semibold tracking-tight">Up to 40% lower vehicle cost</h3>
-              <p className="mt-4 text-lg text-muted">
-                The battery is the most expensive part of an EV. Buy the vehicle without it, lease the battery
-                from us, and put the difference into growing your fleet.
-              </p>
-            </div>
-            <div className="flex items-center justify-center rounded-2xl bg-lime p-8 md:p-12">
-              <Image
-                src="/images/savings.png"
-                alt="A rider celebrates next to a large rupee banknote, showing lower vehicle cost"
-                width={1221}
-                height={973}
-                sizes="(min-width: 768px) 45vw, 100vw"
-                className="h-auto w-full max-w-md"
+      {/* 5. Inside the pack (Scroll Sequence 1 + Tech panels) */}
+      <InsidePackSection />
+
+      {/* 6. Specs & Asymmetric Hardware Detail Views */}
+      <section id="specs" aria-label="Pack specifications" className="bg-surface py-24 md:py-28">
+        <div className="wrap space-y-12">
+          <div className="grid items-start gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <SectionHeading
+                eyebrow="Engineering specifications"
+                title="Pack architecture built for high-cycle fleet duty"
+                intro="[BRACKETED] datasheet tokens stay hardcoded pending sign-off."
               />
             </div>
-          </article>
-          {benefits.map((b) => (
-            <article
-              key={b.title}
-              data-reveal
-              className="card p-8 transition-transform duration-500 ease-brand hover:-translate-y-1 md:col-span-3"
-            >
-              <b.icon size="2rem" aria-hidden className="text-accent" />
-              <h3 className="mt-6 text-xl font-semibold">{b.title}</h3>
-              <p className="mt-2 text-muted">{b.body}</p>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      {/* 5. Tagline reveal */}
-      <TaglineReveal
-        lines={[
-          "Riders should be earning,",
-          "not waiting for a charge.",
-          "We keep a full battery",
-          "ready at every station.",
-        ]}
-      />
-
-      {/* 6. How it works */}
-      <Section label="How it works">
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <div>
-            <SectionHeading
-              eyebrow="How it works"
-              title="From first call to first swap in three steps"
-            />
-            <ol className="mt-10 flex flex-col gap-4">
-              {steps.map((s, i) => (
-                <li key={s.title} data-reveal className="card flex gap-6 p-6">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-lime font-mono text-base font-semibold text-ink">
-                    {i + 1}
-                  </span>
-                  <div>
-                    <h3 className="text-lg font-semibold">{s.title}</h3>
-                    <p className="mt-1 text-muted">{s.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-          <div data-reveal className="overflow-hidden rounded-3xl bg-lime p-8 md:p-12">
-            <Image
-              src="/images/station-helper-rider.png"
-              alt="An EzyEV attendant carries a charged battery from a swap station to a rider"
-              width={1713}
-              height={1462}
-              sizes="(min-width: 768px) 45vw, 100vw"
-              className="h-auto w-full"
-            />
-          </div>
-        </div>
-      </Section>
-
-      {/* 7. Products */}
-      <Section label="Products">
-        <SectionHeading
-          eyebrow="Product"
-          title="One battery network, three ways to use it"
-          intro="Start with swapping, lease batteries for drivers, or convert vehicles you already own."
-        />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {products.map((p) => (
-            <Link
-              key={p.anchor}
-              href={`/product#${p.anchor}`}
-              data-reveal
-              className="card group flex flex-col p-8 transition-colors duration-300 ease-brand hover:bg-raised active:scale-[0.98]"
-            >
-              <p className="eyebrow">{p.name}</p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight">{p.line}</h3>
-              <p className="mt-3 text-muted">{p.body}</p>
-              <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-fg">
-                See how it works
-                <ArrowUpRight
-                  size="1rem"
-                  weight="bold"
-                  aria-hidden
-                  className="transition-transform duration-500 ease-brand group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </Section>
-
-      {/* 8. Who we serve and where */}
-      <Section label="Who we serve">
-        <div className="grid gap-4 md:grid-cols-2">
-          <div data-reveal className="card flex flex-col p-8">
-            <p className="eyebrow">Built for</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight">Fleets that run all day</h2>
-            <ul className="mt-8 grid flex-1 grid-cols-2 gap-2">
-              {segments.map((s) => (
-                <li key={s.label} className="flex flex-col rounded-2xl bg-raised p-4">
-                  <s.icon size="1.5rem" aria-hidden className="text-accent" />
-                  <span className="mt-6 font-semibold">{s.label}</span>
-                  <span className="mt-1 text-sm text-muted">{s.body}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div data-reveal className="card p-8">
-            <p className="eyebrow">Where we operate</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight">Live in three cities</h2>
-            <ul className="mt-8 flex flex-col gap-2">
-              {offices.map((o) => (
-                <li key={o.city} className="flex items-start gap-4 rounded-2xl bg-raised p-4">
-                  <MapPin size="1.5rem" weight="fill" aria-hidden className="shrink-0 text-accent" />
-                  <div>
-                    <p className="font-semibold">
-                      {o.city} <span className="text-sm font-normal text-subtle">{o.tag}</span>
-                    </p>
-                    <p className="mt-1 text-sm text-muted">{o.summary}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-sm text-muted">
-              Running a fleet in another city?{" "}
-              <Link href="/contact" className="font-semibold text-fg underline decoration-line underline-offset-4 transition-colors duration-300 ease-brand hover:decoration-accent">
-                Ask us about expansion
+            <div className="lg:col-span-5 lg:flex lg:justify-end">
+              <Link href="/product" className="btn-secondary">
+                <RollText text="View full platform specs" />
               </Link>
-            </p>
+            </div>
+          </div>
+
+          <dl className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {packSpecs.map((spec) => (
+              <div key={spec.key} className="bg-ground p-6 md:p-8">
+                <dt className="font-mono text-[11px] tracking-widest text-subtle uppercase">{spec.key}</dt>
+                <dd className="mt-4 font-mono text-2xl font-medium text-fg md:text-3xl">{spec.value}</dd>
+                <dd className="mt-2 text-sm text-muted">{spec.label}</dd>
+                <dd className="mt-1 font-mono text-[11px] text-subtle">{spec.unit}</dd>
+              </div>
+            ))}
+            <div className="flex flex-col justify-between bg-ground p-6 md:p-8">
+              <dt className="font-mono text-[11px] tracking-widest text-accent uppercase">ENVELOPE RATIO</dt>
+              <dd className="mt-4 font-mono text-2xl font-medium text-accent md:text-3xl">1 : 1.6 : 2.4</dd>
+              <dd className="mt-2 text-sm text-muted">Depth : Width : Height</dd>
+              <dd className="mt-1 font-mono text-[11px] text-subtle">Extruded ribbed aluminium</dd>
+            </div>
+          </dl>
+
+          {/* Asymmetric hardware macro views — zero redundant card captions */}
+          <div className="grid items-start gap-6 lg:grid-cols-12">
+            <div className="overflow-hidden rounded-xl border border-line bg-ground lg:col-span-7">
+              <img
+                src="/media/product/macro-bms-1x.webp"
+                srcSet="/media/product/macro-bms-1x.webp 450w, /media/product/macro-bms-2x.webp 900w"
+                sizes="(min-width: 1024px) 54vw, 92vw"
+                alt="Macro render of carbon BMS board, white sense-wire harness, and red terminal boot inside the EzyEV battery pack"
+                loading="lazy"
+                decoding="async"
+                width={450}
+                height={300}
+                className="aspect-[3/2] w-full bg-[#0b0d0c] object-cover"
+              />
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:col-span-5">
+              <div className="overflow-hidden rounded-xl border border-line bg-ground sm:col-span-2">
+                <img
+                  src="/media/product/macro-connector-1x.webp"
+                  srcSet="/media/product/macro-connector-1x.webp 450w, /media/product/macro-connector-2x.webp 900w"
+                  sizes="(min-width: 1024px) 36vw, 92vw"
+                  alt="Macro render of metallic cable glands and high-current Anderson connector on the yellow top cap"
+                  loading="lazy"
+                  decoding="async"
+                  width={450}
+                  height={300}
+                  className="aspect-[16/9] w-full bg-[#0b0d0c] object-cover"
+                />
+              </div>
+              <div className="overflow-hidden rounded-xl border border-line bg-ground">
+                <img
+                  src="/media/product/macro-ribs-1x.webp"
+                  srcSet="/media/product/macro-ribs-1x.webp 450w, /media/product/macro-ribs-2x.webp 900w"
+                  sizes="(min-width: 1024px) 18vw, (min-width: 640px) 45vw, 92vw"
+                  alt="Macro render of extruded green AL-6063 aluminium cooling ribs and chamfered corner"
+                  loading="lazy"
+                  decoding="async"
+                  width={450}
+                  height={300}
+                  className="aspect-[3/2] w-full bg-[#0b0d0c] object-cover"
+                />
+              </div>
+              <div className="overflow-hidden rounded-xl border border-line bg-ground">
+                <img
+                  src="/media/product/macro-keyswitch-1x.webp"
+                  srcSet="/media/product/macro-keyswitch-1x.webp 450w, /media/product/macro-keyswitch-2x.webp 900w"
+                  sizes="(min-width: 1024px) 18vw, (min-width: 640px) 45vw, 92vw"
+                  alt="Macro render of round metal key switch and digital readout window on the top cap"
+                  loading="lazy"
+                  decoding="async"
+                  width={450}
+                  height={300}
+                  className="aspect-[3/2] w-full bg-[#0b0d0c] object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* 9. FAQ */}
-      <Section id="faq" label="Frequently asked questions">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
+      {/* 7. Applications */}
+      <section aria-label="Applications" className="bg-ground py-24 md:py-28">
+        <div className="wrap grid items-start gap-12 lg:grid-cols-12">
+          <div className="space-y-8 lg:col-span-7">
+            <SectionHeading
+              eyebrow="Applications · Who we serve"
+              title="Commercial two-wheeler and three-wheeler fleet applications"
+            />
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {applications.map((app) => (
+                <article key={app.id} className="panel p-6">
+                  <p className="font-mono text-[11px] tracking-wider text-accent uppercase">{app.vehicles}</p>
+                  <h3 className="mt-2 text-xl font-medium text-fg">{app.title}</h3>
+                  <p className="mt-2 text-base leading-relaxed text-muted">{app.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-xl border border-line bg-surface lg:col-span-5">
+            <img
+              src="/media/lifestyle/slot2-rider-v1-1x.webp"
+              srcSet="/media/lifestyle/slot2-rider-v1-1x.webp 480w, /media/lifestyle/slot2-rider-v1-2x.webp 960w"
+              sizes="(min-width: 1024px) 42vw, 92vw"
+              alt="Delivery rider standing beside a matte-black electric two-wheeler in an Indian city lane at night"
+              loading="lazy"
+              decoding="async"
+              width={480}
+              height={600}
+              className="aspect-[4/5] w-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Network & Impact Counters + Active Hubs */}
+      <section aria-label="Network and impact" className="bg-surface py-24 md:py-28">
+        <div className="wrap space-y-12">
+          <div className="grid items-start gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <SectionHeading
+                eyebrow="Network coverage"
+                title="Live swap corridors in Pune, Mumbai, and Nagpur"
+              />
+            </div>
+            <div className="lg:col-span-5 lg:flex lg:justify-end">
+              <Link href="/cities" className="btn-secondary">
+                <RollText text="Explore active cities" />
+              </Link>
+            </div>
+          </div>
+
+          <ImpactCounters />
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {offices.map((o) => (
+              <Link
+                key={o.city}
+                href={`/ev-battery-service/${o.slug}`}
+                className="panel group flex flex-col justify-between bg-ground p-6 transition-colors duration-300 ease-brand hover:border-accent/50"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-medium text-fg">{o.city}</h3>
+                    <span className="font-mono text-[11px] tracking-wider text-accent uppercase">{o.tag}</span>
+                  </div>
+                  <p className="mt-3 text-base leading-relaxed text-muted">{o.summary}</p>
+                </div>
+                <span className="mt-4 inline-flex min-h-[44px] items-center font-mono text-xs text-fg group-hover:text-accent">
+                  View {o.city} service →
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="overflow-hidden rounded-xl border border-line bg-ground">
+            <img
+              src="/media/lifestyle/slot6-aerial-v1-1x.webp"
+              srcSet="/media/lifestyle/slot6-aerial-v1-mobile.webp 480w, /media/lifestyle/slot6-aerial-v1-1x.webp 960w, /media/lifestyle/slot6-aerial-v1-2x.webp 1920w"
+              sizes="(min-width: 1280px) 1232px, 92vw"
+              width={960}
+              height={411}
+              alt="Aerial night view of Indian urban arterial corridors connecting EzyEV battery swap zones"
+              loading="lazy"
+              decoding="async"
+              className="aspect-[21/9] w-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Case study */}
+      <section aria-label="Case study" className="bg-ground py-24 md:py-28">
+        <div className="wrap grid items-start gap-12 lg:grid-cols-12">
+          <div className="overflow-hidden rounded-xl border border-line bg-surface lg:col-span-6">
+            <img
+              src="/media/lifestyle/slot2-rider-v3-1x.webp"
+              srcSet="/media/lifestyle/slot2-rider-v3-1x.webp 480w, /media/lifestyle/slot2-rider-v3-2x.webp 960w"
+              sizes="(min-width: 1024px) 46vw, 92vw"
+              alt="Commercial delivery rider beside an electric two-wheeler on an Indian city street at night"
+              loading="lazy"
+              decoding="async"
+              width={480}
+              height={600}
+              className="aspect-[4/5] w-full object-cover"
+            />
+          </div>
+
+          <div className="space-y-8 lg:col-span-6">
+            <div>
+              <p className="eyebrow">{caseStudyPlaceholder.eyebrow}</p>
+              <h2 className="mt-4 text-3xl leading-[1.08] font-light tracking-[-0.03em] text-fg md:text-5xl">
+                {caseStudyPlaceholder.title}
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted">
+                {caseStudyPlaceholder.story}
+              </p>
+            </div>
+
+            <dl className="grid gap-4 border-y border-line py-6 sm:grid-cols-3">
+              {caseStudyPlaceholder.stats.map((st) => (
+                <div key={st.label}>
+                  <dt className="font-mono text-[11px] tracking-wider text-subtle uppercase">{st.label}</dt>
+                  <dd className="mt-1 font-mono text-2xl font-medium text-fg">{st.value}</dd>
+                  <dd className="mt-1 text-sm text-muted">{st.note}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <Link href={caseStudyPlaceholder.ctaHref} className="btn-secondary">
+              <RollText text={caseStudyPlaceholder.ctaLabel} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Field notes & updates */}
+      <section aria-label="Field notes and updates" className="bg-surface py-24 md:py-28">
+        <div className="wrap space-y-10">
+          <div className="grid items-start gap-6 lg:grid-cols-12">
+            <div className="lg:col-span-8">
+              <SectionHeading
+                eyebrow="Field notes"
+                title="EzyEV network deployment updates and engineering notes"
+              />
+            </div>
+            <div className="lg:col-span-4 lg:flex lg:justify-end">
+              <Link href="/blog" className="btn-secondary">
+                <RollText text="All updates" />
+                <span aria-hidden>→</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {hardcodedNewsPlaceholders.map((post) => (
+              <article key={post.slug} className="panel flex flex-col justify-between bg-ground p-6">
+                <div>
+                  <div className="flex items-center justify-between font-mono text-[11px] text-subtle">
+                    <span className="text-accent">{post.tag}</span>
+                    <span>{post.date}</span>
+                  </div>
+                  <h3 className="mt-4 text-xl font-medium leading-snug text-fg">{post.title}</h3>
+                  <p className="mt-2 text-base leading-relaxed text-muted">{post.excerpt}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 11. Certifications & Safety */}
+      <section id="safety" aria-label="Safety and compliance" className="bg-ground py-24 md:py-28">
+        <div className="wrap space-y-12">
+          <div className="grid items-start gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <SectionHeading
+                eyebrow="Safety & compliance"
+                title="Automated bay thermal validation before every release"
+              />
+            </div>
+            <div className="overflow-hidden rounded-xl border border-line bg-surface lg:col-span-5">
+              <img
+                src="/media/product/macro-cells-1x.webp"
+                srcSet="/media/product/macro-cells-1x.webp 450w, /media/product/macro-cells-2x.webp 900w"
+                sizes="(min-width: 1024px) 38vw, 92vw"
+                width={450}
+                height={300}
+                loading="lazy"
+                decoding="async"
+                alt="Macro view of compressed modular lithium cell stack and insulated copper interconnects inside the EzyEV pack"
+                className="aspect-[3/2] w-full bg-[#0b0d0c] object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {certifications.map((cert) => (
+              <div key={cert.code} className="panel bg-surface p-6">
+                <p className="font-mono text-xs text-yellow">{cert.code}</p>
+                <h3 className="mt-3 text-xl font-medium text-fg">{cert.title}</h3>
+                <p className="mt-2 font-mono text-xs text-muted">{cert.status}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 12. FAQ */}
+      <section id="faq" aria-label="Frequently asked questions" className="bg-surface py-24 md:py-28">
+        <div className="wrap grid items-start gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="FAQ"
-              title="Questions operators ask us first"
+              title="Battery swapping questions operators ask first"
               intro={
                 <>
-                  Something else on your mind? Write to{" "}
-                  <a href="mailto:info@ezyev.in" className="text-fg underline decoration-line underline-offset-4 hover:decoration-accent">
-                    info@ezyev.in
+                  Need fleet-specific numbers? Write to{" "}
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="inline-flex min-h-[44px] items-center text-fg underline decoration-accent/60 underline-offset-4 hover:text-accent"
+                  >
+                    {site.email}
                   </a>
+                  .
                 </>
               }
             />
           </div>
-          <div data-reveal className="md:col-span-8">
+          <div className="lg:col-span-8">
             <FaqList items={faqs} />
           </div>
         </div>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      </Section>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+      </section>
 
-      {/* 10. Risk reversal and final CTA */}
-      <CtaBand />
+      {/* 13. Work With Us B2B Form + Exact Contact Details */}
+      <section id="work-with-us" aria-label="Work with us" className="bg-ground py-24 md:py-28">
+        <div className="wrap grid items-start gap-12 lg:grid-cols-12">
+          <div className="space-y-8 lg:col-span-5">
+            <SectionHeading
+              eyebrow="Work with us"
+              title="Deploy EzyEV battery swapping for your fleet or OEM line"
+              intro="Tell us your vehicle category, fleet size, and daily routes. Our operations team maps station coverage and sends a fixed monthly plan."
+            />
+
+            <div className="overflow-hidden rounded-xl border border-line bg-surface">
+              <img
+                src="/media/product/top-cap-1x.webp"
+                srcSet="/media/product/top-cap-1x.webp 500w, /media/product/top-cap-2x.webp 1000w"
+                sizes="(min-width: 1024px) 38vw, 92vw"
+                width={500}
+                height={500}
+                loading="lazy"
+                decoding="async"
+                alt="Top view of EzyEV safety-yellow battery cap with carry handle, key lock, dual cable glands, and Anderson connector"
+                className="aspect-[16/10] w-full bg-[#0b0d0c] object-cover"
+              />
+            </div>
+
+            <div className="space-y-4 border-t border-line pt-6 text-base">
+              <div>
+                <p className="font-mono text-[11px] tracking-wider text-subtle uppercase">Direct contact</p>
+                <div className="mt-1 flex flex-col items-start">
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="inline-flex min-h-[44px] items-center font-medium text-fg hover:text-accent"
+                  >
+                    {site.email}
+                  </a>
+                  <a
+                    href={site.phoneHref}
+                    className="inline-flex min-h-[44px] items-center font-mono text-muted tabular-nums hover:text-fg"
+                  >
+                    {site.phone}
+                  </a>
+                </div>
+              </div>
+              <div className="space-y-3 border-t border-line pt-4">
+                <p className="font-mono text-[11px] tracking-wider text-subtle uppercase">Offices</p>
+                {offices.map((o) => (
+                  <div key={o.city}>
+                    <p className="font-medium text-fg">
+                      {o.city} <span className="font-mono text-[11px] text-accent">{o.tag}</span>
+                    </p>
+                    <p className="text-sm text-muted">{o.address.join(", ")}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="panel p-6 md:p-10 lg:col-span-7">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
     </>
   );
 }

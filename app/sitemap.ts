@@ -1,11 +1,31 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/content/site";
+import { offices, site } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/product", "/what-we-do", "/careers", "/contact", "/privacy", "/terms"];
-  return routes.map((path) => ({
-    url: `${site.url}${path}`,
-    changeFrequency: path === "" ? "weekly" : "monthly",
-    priority: path === "" ? 1 : path === "/privacy" || path === "/terms" ? 0.3 : 0.8,
+  const now = new Date();
+  const routes = [
+    "",
+    "/product",
+    "/what-we-do",
+    "/about",
+    "/services",
+    "/cities",
+    ...offices.map((o) => `/ev-battery-service/${o.slug}`),
+    "/careers",
+    "/career",
+    "/career/software-engineer-intern",
+    "/faq",
+    "/contact",
+    "/price",
+    "/blog",
+    "/privacy",
+    "/terms",
+  ];
+
+  return routes.map((route) => ({
+    url: `${site.url}${route}`,
+    lastModified: now,
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1 : 0.8,
   }));
 }

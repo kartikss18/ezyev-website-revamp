@@ -1,102 +1,20 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import {
-  BatteryCharging,
-  ChartLineUp,
-  ClockCountdown,
-  Cloud,
-  Cpu,
-  DeviceMobile,
-  NavigationArrow,
-  Pulse,
-  QrCode,
-  Path,
-  ShieldCheck,
-  BellRinging,
-} from "@phosphor-icons/react/dist/ssr";
-import { CheckList, CtaBand, PageHero, PrimaryCta, Section, SectionHeading } from "@/components/ui";
+import { packSpecs, platformCapabilities, site, threePillars } from "@/content/site";
+import { LazyBatteryStage } from "@/components/three/LazyBatteryStage";
+import { PageHero, SectionHeading, WorkWithUsBand } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Product: battery swapping, leasing and retrofit",
+  title: "Product: Battery Swapping, Leasing & Retrofit",
   description:
-    "Automated EzyEV swap stations, battery leasing with fixed monthly plans, and a retrofit kit for existing 2W and 3W fleets. Built in house with a rider app and fleet dashboard.",
+    "Automated EzyEV swap stations, battery leasing with fixed monthly plans, and a retrofit kit for 2W and 3W fleets—backed by an in-house rider app and cloud telemetry.",
   alternates: { canonical: "/product" },
 };
 
-const offerings = [
-  {
-    id: "swapping",
-    eyebrow: "Battery swapping",
-    title: "60 second swaps. Zero downtime.",
-    body: "A network of automated stations placed on the routes your riders already run. They pull in, swap a drained battery for a charged one and leave, without a staff member or a queue.",
-    points: [
-      "Automated swap stations at strategic urban hubs",
-      "App based booking and authentication",
-      "Automatic door unlock and battery validation",
-      "Open 24x7, compact enough to fit where riders stop",
-    ],
-    image: {
-      src: "/images/swap-station-delivery.png",
-      alt: "A delivery rider arriving at an EzyEV swap station",
-      w: 2187,
-      h: 1588,
-      panel: "bg-stage",
-    },
-  },
-  {
-    id: "leasing",
-    eyebrow: "Battery leasing",
-    title: "Own the vehicle. Lease the power.",
-    body: "Buy the vehicle without the battery and subscribe to the energy instead. Drivers and operators pay less upfront, know their monthly cost, and hand battery risk back to us.",
-    points: [
-      "Up to 40% lower vehicle cost",
-      "Fixed monthly battery subscription plans",
-      "Better return on investment for owners and drivers",
-      "Real time battery monitoring and preventive maintenance",
-    ],
-    image: {
-      src: "/images/savings.png",
-      alt: "A rider celebrating next to a rupee banknote",
-      w: 1221,
-      h: 973,
-      panel: "bg-lime",
-    },
-  },
-  {
-    id: "retrofit",
-    eyebrow: "Retrofit kit",
-    title: "Electrify the fleet you already run.",
-    body: "Replacing a whole fleet at once is rarely the right call. Our retrofit kit converts suitable 2W and 3W vehicles so they can run on EzyEV batteries and the same swap network.",
-    points: [
-      "Convert existing vehicles instead of buying new ones",
-      "Runs on the same stations, app and monthly plans",
-      "Battery partnerships that bring the vehicle price down",
-      "We confirm fit model by model before you commit",
-    ],
-    image: {
-      src: "/images/station-helper-rider.png",
-      alt: "An EzyEV attendant hands a charged battery to a rider",
-      w: 1713,
-      h: 1462,
-      panel: "bg-lime",
-    },
-  },
-] as const;
-
-const swapFlow = [
-  { icon: BellRinging, title: "Low battery alert", body: "The app warns the rider before the battery runs low." },
-  { icon: NavigationArrow, title: "Nearest station", body: "Smart station finder routes them to the closest free slot." },
-  { icon: QrCode, title: "Scan and unlock", body: "A QR code or RFID card opens an empty slot." },
-  { icon: BatteryCharging, title: "Swap and ride", body: "Drained battery in, charged battery out, back on the road in under two minutes." },
-] as const;
-
-const platform = [
-  { icon: DeviceMobile, title: "Rider app", body: "Booking, authentication and navigation to the nearest station." },
-  { icon: Cpu, title: "IoT connected stations", body: "Each slot reports charge level and validates every battery it holds." },
-  { icon: Cloud, title: "Cloud backend", body: "Swap history, state of charge and location for every battery in the fleet." },
-  { icon: Pulse, title: "Battery health tracking", body: "Early warnings so batteries are serviced before they fail on the road." },
-  { icon: Path, title: "Energy and route tracking", body: "See how much energy each vehicle uses and where it runs." },
-  { icon: ChartLineUp, title: "Analytics and reports", body: "AI driven reporting on uptime and cost to guide fleet decisions." },
+const swapSteps = [
+  { step: "01", title: "Low-battery alert", body: "The rider app warns before state of charge drops below route margin." },
+  { step: "02", title: "Nearest station finder", body: "Smart routing guides the rider to the closest EzyEV bay with a charged pack." },
+  { step: "03", title: "Scan QR or tap RFID", body: "Automated authentication unlocks an open bay without station staff." },
+  { step: "04", title: "Swap & ride", body: "Drained pack in, validated charged pack out—back on route in under two minutes." },
 ] as const;
 
 export default function ProductPage() {
@@ -104,108 +22,192 @@ export default function ProductPage() {
     <>
       <PageHero
         eyebrow="Product"
-        title={
-          <>
-            One battery network.
-            <br className="max-sm:hidden" /> Three ways to run on it.
-          </>
-        }
-        intro="Automated swap stations, a rider app and a fleet dashboard, all built in house by EzyEV. Pick the model that matches how your fleet works today."
+        title="One battery network. Three ways to deploy."
+        intro="Automated 24x7 swap bays, battery leasing subscription plans, and 2W/3W retrofit kits—all backed by EzyEV's in-house IoT hardware and telemetry cloud."
       >
-        <div className="mt-8 flex justify-center">
-          <PrimaryCta />
-        </div>
-        <nav aria-label="Products on this page" className="mt-12 flex flex-wrap justify-center gap-2">
-          {offerings.map((o) => (
+        <nav aria-label="Product sections" className="mt-8 flex flex-wrap gap-2">
+          {threePillars.map((p) => (
             <a
-              key={o.id}
-              href={`#${o.id}`}
-              className="rounded-full border border-line bg-surface px-3 py-2 text-sm font-semibold text-muted transition-colors duration-300 ease-brand hover:bg-raised hover:text-fg"
+              key={p.id}
+              href={`#${p.id === "packs" ? "leasing" : p.id === "network" ? "swapping" : "retrofit"}`}
+              className="btn-secondary"
             >
-              {o.eyebrow}
+              {p.title}
             </a>
           ))}
         </nav>
       </PageHero>
 
-      {offerings.map((o, i) => (
-        <Section key={o.id} id={o.id} label={o.eyebrow} className="scroll-mt-24">
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            <div className={i % 2 === 1 ? "md:order-2" : ""}>
-              <SectionHeading eyebrow={o.eyebrow} title={o.title} intro={o.body} />
-              <div data-reveal className="mt-8">
-                <CheckList items={o.points} />
-              </div>
+      {/* Pack Hero Render & Lineup */}
+      <section aria-label="Pack showcase" className="border-b border-line bg-ground py-20 md:py-28">
+        <div className="wrap space-y-12">
+          <div className="grid items-center gap-10 lg:grid-cols-12">
+            <div className="space-y-6 lg:col-span-5">
+              <SectionHeading
+                eyebrow="EzyEV Pack"
+                title="Factory-engineered for rapid daily exchange."
+                intro="Extruded anodized green aluminium enclosure (1 : 1.6 : 2.4), safety-yellow top cap with high-current Anderson interface, key lock, and real-time BMS telemetry."
+              />
+              <dl className="divide-y divide-line border-y border-line font-mono text-xs">
+                {packSpecs.slice(0, 5).map((s) => (
+                  <div key={s.key} className="flex justify-between py-3">
+                    <dt className="text-subtle">{s.key}</dt>
+                    <dd className="text-fg">{s.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-            <div data-reveal className={`overflow-hidden rounded-3xl p-8 md:p-12 ${o.image.panel}`}>
-              <Image
-                src={o.image.src}
-                alt={o.image.alt}
-                width={o.image.w}
-                height={o.image.h}
-                sizes="(min-width: 768px) 45vw, 100vw"
-                className="h-auto w-full"
+            <div className="panel h-[420px] overflow-hidden lg:col-span-7 lg:h-[480px]">
+              <LazyBatteryStage
+                posterSrc="/media/product/hero-pack-1x.webp"
+                posterSrcSet="/media/product/hero-pack-1x.webp 640w, /media/product/hero-pack-2x.webp 1280w"
+                posterMobileSrcSet="/media/product/hero-pack-mobile-1x.webp 360w, /media/product/hero-pack-mobile-2x.webp 720w"
+                posterSizes="(min-width: 1024px) 680px, 92vw"
+                posterWidth={640}
+                posterHeight={360}
+                posterLoading="lazy"
+                posterAlt="EzyEV swappable battery pack 3D view"
+                config={{ mode: "pack", autoRotate: true, orbit: true }}
               />
             </div>
           </div>
-        </Section>
-      ))}
 
-      <Section label="How a swap works">
-        <SectionHeading
-          eyebrow="The swap"
-          title="Under two minutes, start to finish"
-          intro="No staff at the station and nothing for the rider to learn beyond a scan."
-          align="center"
-        />
-        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {swapFlow.map((s, i) => (
-            <li key={s.title} data-reveal className="card p-6">
-              <div className="flex items-center justify-between">
-                <s.icon size="2rem" aria-hidden className="text-accent" />
-                <span className="font-mono text-sm text-subtle">0{i + 1}</span>
-              </div>
-              <h3 className="mt-6 text-lg font-semibold">{s.title}</h3>
-              <p className="mt-2 text-muted">{s.body}</p>
-            </li>
-          ))}
-        </ol>
-      </Section>
+          <figure className="panel overflow-hidden">
+            <img
+              src="/media/product/pack-lineup-1x.webp"
+              srcSet="/media/product/pack-lineup-1x.webp 840w, /media/product/pack-lineup-2x.webp 1680w"
+              sizes="(min-width: 1024px) 1200px, 92vw"
+              alt="Three EzyEV swappable battery packs staged at staggered depth"
+              loading="lazy"
+              decoding="async"
+              width={840}
+              height={360}
+              className="aspect-[21/9] w-full bg-[#0b0d0c] object-cover"
+            />
+          </figure>
+        </div>
+      </section>
 
-      <Section label="Platform">
-        <div className="rounded-3xl border border-line bg-surface p-2">
-          <div className="grid gap-8 rounded-2xl bg-olive p-8 md:grid-cols-12 md:p-12">
-            <div className="md:col-span-5">
-              <SectionHeading
-                eyebrow="Platform"
-                title="Hardware and software we build ourselves"
-                intro="Owning the whole stack means one team answers for the station, the app and the data."
-              />
-              <ul data-reveal className="mt-8 flex flex-col gap-3 text-muted">
-                <li className="flex gap-3">
-                  <ShieldCheck size="1.5rem" weight="fill" aria-hidden className="shrink-0 text-accent" />
-                  Every battery validated before it is released
-                </li>
-                <li className="flex gap-3">
-                  <ClockCountdown size="1.5rem" weight="fill" aria-hidden className="shrink-0 text-accent" />
-                  Live state of charge for every slot, every station
-                </li>
-              </ul>
-            </div>
-            <ul className="grid gap-2 sm:grid-cols-2 md:col-span-7">
-              {platform.map((p) => (
-                <li key={p.title} data-reveal className="rounded-2xl bg-raised p-6">
-                  <p.icon size="1.5rem" aria-hidden className="text-accent" />
-                  <h3 className="mt-4 font-semibold">{p.title}</h3>
-                  <p className="mt-1 text-sm text-muted">{p.body}</p>
-                </li>
-              ))}
+      {/* Three Offering Deep-Dives */}
+      <section id="swapping" aria-label="Battery swapping" className="scroll-mt-24 border-b border-line bg-surface py-20 md:py-28">
+        <div className="wrap grid items-center gap-12 lg:grid-cols-12">
+          <div className="space-y-6 lg:col-span-6">
+            <SectionHeading
+              eyebrow="01 · Battery Swapping"
+              title="60-second swaps. Zero downtime."
+              intro="A network of automated stations placed on the routes your riders already run. They pull in, swap a drained battery for a charged one, and leave without a queue."
+            />
+            <ul className="space-y-3 font-mono text-xs text-muted">
+              <li>• Automated swap stations at strategic urban hubs</li>
+              <li>• App-based booking and QR / RFID authentication</li>
+              <li>• Automated door unlock and pack validation</li>
+              <li>• Open 24x7, compact footprint for city corners</li>
+            </ul>
+          </div>
+          <figure className="panel overflow-hidden lg:col-span-6">
+            <img
+              src="/media/product/swap-moment-2x.webp"
+              alt="EzyEV battery pack gliding into an automated swap bay slot"
+              loading="lazy"
+              width={1280}
+              height={720}
+              className="aspect-video w-full bg-[#0b0d0c] object-cover"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section id="leasing" aria-label="Battery leasing" className="scroll-mt-24 border-b border-line bg-ground py-20 md:py-28">
+        <div className="wrap grid items-center gap-12 lg:grid-cols-12">
+          <figure className="panel overflow-hidden lg:order-1 lg:col-span-6">
+            <img
+              src="/media/product/front-elevation-2x.webp"
+              alt="Front elevation of the EzyEV battery pack showing extruded aluminium ribs and EzyEV mark"
+              loading="lazy"
+              width={1000}
+              height={1000}
+              className="aspect-square w-full bg-[#0b0d0c] object-cover"
+            />
+          </figure>
+          <div className="space-y-6 lg:order-2 lg:col-span-6">
+            <SectionHeading
+              eyebrow="02 · Battery Leasing"
+              title="Own the vehicle. Lease the power."
+              intro="Buy electric two-wheelers and three-wheelers without the battery and subscribe to energy instead. Drivers and operators pay less upfront, know their monthly bill, and eliminate replacement risk."
+            />
+            <ul className="space-y-3 font-mono text-xs text-muted">
+              <li>• Up to 40% reduction in upfront vehicle CapEx</li>
+              <li>• Fixed monthly battery subscription plans</li>
+              <li>• Better RoI for fleet owners and individual drivers</li>
+              <li>• Real-time battery monitoring &amp; preventive maintenance</li>
             </ul>
           </div>
         </div>
-      </Section>
+      </section>
 
-      <CtaBand />
+      <section id="retrofit" aria-label="Retrofit kit" className="scroll-mt-24 border-b border-line bg-surface py-20 md:py-28">
+        <div className="wrap grid items-center gap-12 lg:grid-cols-12">
+          <div className="space-y-6 lg:col-span-6">
+            <SectionHeading
+              eyebrow="03 · Retrofit Kit"
+              title="Electrify the fleet you already run."
+              intro="Replacing an entire fleet at once is rarely practical. Our retrofit kit converts compatible 2W and 3W vehicles onto EzyEV swappable batteries and the same swap network."
+            />
+            <ul className="space-y-3 font-mono text-xs text-muted">
+              <li>• Convert existing 2W and 3W vehicles instead of scrapping</li>
+              <li>• Runs on the same automated swap bays, app, and plans</li>
+              <li>• OEM &amp; dealer partnerships to lower fleet acquisition cost</li>
+              <li>• Fit confirmed model-by-model before rollout</li>
+            </ul>
+          </div>
+          <figure className="panel overflow-hidden lg:col-span-6">
+            <img
+              src="/media/product/top-cap-2x.webp"
+              alt="Top-down view of the EzyEV battery pack cap showing handle, key switch, display, and Anderson connector"
+              loading="lazy"
+              width={1000}
+              height={1000}
+              className="aspect-square w-full bg-[#0b0d0c] object-cover"
+            />
+          </figure>
+        </div>
+      </section>
+
+      {/* 4-Step Swap Flow + 6 Platform Capabilities */}
+      <section aria-label="Swap flow and platform" className="border-b border-line bg-ground py-20 md:py-28">
+        <div className="wrap space-y-20">
+          <div className="space-y-10">
+            <SectionHeading eyebrow="How a swap works" title="Under two minutes, start to finish." />
+            <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {swapSteps.map((s) => (
+                <li key={s.step} className="panel p-6">
+                  <span className="font-mono text-xs text-accent">{s.step}</span>
+                  <h3 className="mt-4 text-lg font-medium text-fg">{s.title}</h3>
+                  <p className="mt-2 text-sm text-muted">{s.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="space-y-10 border-t border-line pt-16">
+            <SectionHeading
+              eyebrow="In-house stack"
+              title="Hardware, firmware, and fleet telemetry built in-house."
+              intro={`Built on TypeScript, Node.js, Go, React Native, Kafka, MQTT, and TimescaleDB—one engineering team answers for ${site.name}'s stations, app, and cloud.`}
+            />
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {platformCapabilities.map((cap) => (
+                <article key={cap.title} className="panel p-6">
+                  <h3 className="text-lg font-medium text-fg">{cap.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{cap.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <WorkWithUsBand />
     </>
   );
 }

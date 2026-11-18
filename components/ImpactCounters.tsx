@@ -1,74 +1,65 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { impact } from "@/content/site";
+import { impactFormula } from "@/content/site";
 
 type Totals = { km: number; swaps: number; co2Tonnes: number };
 
 function computeTotals(now: number): Totals {
-  const seconds = Math.max(0, (now - new Date(impact.startDate).getTime()) / 1000);
+  const seconds = Math.max(0, (now - new Date(impactFormula.startDate).getTime()) / 1000);
   const days = seconds / 86400;
-  const km = impact.totalBatteries * impact.kmPerBatteryPerDay * days;
-  const swaps = impact.totalBatteries * impact.swapsPerBatteryPerDay * days;
-  return { km, swaps, co2Tonnes: (km * impact.co2KgPerKm) / 1000 };
+  const km = impactFormula.totalBatteries * impactFormula.kmPerBatteryPerDay * days;
+  const swaps = impactFormula.totalBatteries * impactFormula.swapsPerBatteryPerDay * days;
+  return { km, swaps, co2Tonnes: (km * impactFormula.co2KgPerKm) / 1000 };
 }
 
 const fmt = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 });
 
-export function useImpactTotals() {
+export function ImpactCounters() {
   const [totals, setTotals] = useState<Totals | null>(null);
+
   useEffect(() => {
     setTotals(computeTotals(Date.now()));
     const id = window.setInterval(() => setTotals(computeTotals(Date.now())), 1000);
     return () => window.clearInterval(id);
   }, []);
-  return totals;
-}
 
-/* One line proof signal for the hero */
-export function ImpactLine() {
-  const totals = useImpactTotals();
-  return (
-    <p className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted">
-      <span className="relative flex size-2" aria-hidden>
-        <span className="absolute inline-flex size-full animate-ping rounded-full bg-lime opacity-60 motion-reduce:animate-none" />
-        <span className="relative inline-flex size-2 rounded-full bg-lime" />
-      </span>
-      {totals ? (
-        <span>
-          <span className="font-semibold text-fg tabular-nums">{fmt.format(totals.swaps)}</span> battery swaps since January 2026
-        </span>
-      ) : (
-        <span className="skeleton h-4 w-56" aria-label="Loading live swap count" />
-      )}
-      <span aria-hidden className="text-subtle max-sm:hidden">·</span>
-      <span>Live in Pune, Mumbai and Nagpur</span>
-    </p>
-  );
-}
-
-/* Three stat tiles */
-export function ImpactCounters() {
-  const totals = useImpactTotals();
-  const stats = [
-    { label: "Clean kilometres travelled", value: totals?.km, note: "Zero tailpipe emission" },
-    { label: "Battery swaps completed", value: totals?.swaps, note: "Since January 2026" },
-    { label: "Tonnes of CO₂ avoided", value: totals?.co2Tonnes, note: "Against petrol two wheelers" },
+  const cards = [
+    { key: "CITIES", label: "Live metro hubs", val: "03", note: "Pune · Mumbai · Nagpur [CITIES]" },
+    { key: "STATIONS", label: "Automated swap bays", val: "[STATIONS]", note: "24x7 IoT corridor network" },
+    { key: "PACKS DEPLOYED", label: "Batteries in circulation", val: "[PACKS DEPLOYED]", note: `${impactFormula.totalBatteries} baseline model` },
+    {
+      key: "SWAPS",
+      label: "Cumulative battery swaps",
+      val: totals ? `${fmt.format(totals.swaps)}+` : "[SWAPS]",
+      note: "Formula estimate since Jan 2026 [TODO]",
+    },
+    {
+      key: "KM",
+      label: "Clean kilometres travelled",
+      val: totals ? `${fmt.format(totals.km)}+` : "[KM]",
+      note: "Zero tailpipe emissions [TODO]",
+    },
+    {
+      key: "CO₂ AVOIDED",
+      label: "Tonnes of CO₂ avoided",
+      val: totals ? `${fmt.format(totals.co2Tonnes)}+` : "[CO₂ AVOIDED]",
+      note: "Against petrol 2W/3W baseline [TODO]",
+    },
   ];
 
   return (
-    <dl className="grid gap-2 rounded-3xl border border-line bg-surface p-2 md:grid-cols-3" aria-live="off">
-      {stats.map((s) => (
-        <div key={s.label} className="rounded-2xl bg-raised p-6">
-          <dt className="text-sm text-muted">{s.label}</dt>
-          <dd className="mt-3 text-4xl font-semibold tracking-tight text-fg tabular-nums">
-            {s.value === undefined ? (
-              <span className="skeleton h-10 w-40 align-middle" aria-label="Loading" />
-            ) : (
-              <>{fmt.format(s.value)}+</>
-            )}
+    <dl className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+      {cards.map((c) => (
+        <div key={c.key} className="flex flex-col justify-between bg-surface p-6 md:p-8">
+          <div>
+            <dt className="font-mono text-[11px] tracking-widest text-subtle uppercase">{c.key}</dt>
+            <p className="mt-1 text-sm text-muted">{c.label}</p>
+          </div>
+          <dd className="mt-6 font-mono text-3xl font-medium tracking-tight text-fg tabular-nums md:text-4xl">
+            {c.val}
           </dd>
-          <dd className="mt-2 text-sm text-subtle">{s.note}</dd>
+          <p className="mt-3 font-mono text-xs text-subtle">{c.note}</p>
         </div>
       ))}
     </dl>

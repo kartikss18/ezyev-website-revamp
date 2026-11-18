@@ -1,263 +1,159 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import {
-  Brain,
-  Clock,
-  Coins,
-  Eye,
-  Gauge,
-  Handshake,
-  Leaf,
-  MapPin,
-  NavigationArrow,
-  Rocket,
-  Target,
-  Users,
-} from "@phosphor-icons/react/dist/ssr";
-import { offices } from "@/content/site";
+import Link from "next/link";
+import { companyStory, offices, platformCapabilities } from "@/content/site";
 import { ImpactCounters } from "@/components/ImpactCounters";
-import { CtaBand, PageHero, Section, SectionHeading } from "@/components/ui";
+import { PageHero, SectionHeading, WorkWithUsBand } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "What we do",
+  title: "What We Do & About EzyEV",
   description:
-    "EzyEV runs battery swapping and battery lifecycle management for electric 2W and 3W fleets in Pune, Mumbai and Nagpur. Our mission, services, values and team.",
+    "EzyEV Technologies runs automated battery swapping and lifecycle management for electric 2W and 3W fleets in Pune, Mumbai, and Nagpur.",
   alternates: { canonical: "/what-we-do" },
 };
-
-const purpose = [
-  {
-    icon: Target,
-    title: "Mission",
-    body: "Reduce the environmental impact of transportation while making EV operations more convenient and more efficient for the people who run them.",
-  },
-  {
-    icon: Eye,
-    title: "Vision",
-    body: "Become the leading provider of EV energy solutions in a world where electric vehicles are the norm.",
-  },
-  {
-    icon: Handshake,
-    title: "Transparency",
-    body: "Build trust with customers, partners and employees through honest communication and fair practice.",
-  },
-] as const;
-
-const services = [
-  {
-    icon: Clock,
-    title: "Higher fleet uptime",
-    body: "Rapid swaps put vehicles back on the road in about a minute, so your fleet spends the day earning.",
-  },
-  {
-    icon: Brain,
-    title: "Decisions backed by data",
-    body: "AI powered analytics and reports show uptime, energy use and cost per vehicle across the fleet.",
-  },
-  {
-    icon: NavigationArrow,
-    title: "Smart station finder",
-    body: "The rider app recommends the nearest station with a charged battery ready.",
-  },
-  {
-    icon: Coins,
-    title: "Lower operating cost",
-    body: "Fixed monthly plans, no battery replacement bills and fewer idle hours bring your cost per kilometre down.",
-  },
-  {
-    icon: Gauge,
-    title: "Smoother operations",
-    body: "Battery allocation, health checks and maintenance are handled by us, so your team manages riders, not batteries.",
-  },
-  {
-    icon: MapPin,
-    title: "Stations where you need them",
-    body: "Stations sit on busy commercial corridors, close to where your riders already pick up and drop off.",
-  },
-] as const;
-
-const values = [
-  {
-    icon: Users,
-    title: "Customers first",
-    body: "We start from what operators and riders need on the road and build the service around it.",
-  },
-  {
-    icon: Rocket,
-    title: "Keep building",
-    body: "Our stations, app and backend are built in house, so we can keep improving every part of the service.",
-  },
-  {
-    icon: Leaf,
-    title: "Cleaner energy",
-    body: "We promote clean, renewable energy through eco friendly EzySwap stations.",
-  },
-] as const;
 
 export default function WhatWeDoPage() {
   return (
     <>
       <PageHero
-        eyebrow="What we do"
-        title={
-          <>
-            We run the batteries
-            <br className="max-sm:hidden" /> so your fleet runs the routes
-          </>
-        }
-        intro="EzyEV is a Battery as a Service company for electric 2W and 3W fleet operators. We own, charge, swap and maintain the batteries, and operators pay a fixed monthly plan for the energy their vehicles use."
+        eyebrow={companyStory.eyebrow}
+        title={companyStory.title}
+        intro={companyStory.intro}
       />
 
-      <Section label="About EzyEV" className="!pt-0">
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <div data-reveal className="overflow-hidden rounded-3xl bg-stage p-8">
-            <Image
-              src="/images/swap-station-delivery.png"
-              alt="An EzyEV swap station in a city with a delivery rider arriving"
-              width={2187}
-              height={1588}
-              sizes="(min-width: 768px) 45vw, 100vw"
-              className="h-auto w-full"
-            />
+      {/* Vision, Mission, Transparency */}
+      <section aria-label="Vision and mission" className="border-b border-line bg-surface py-20 md:py-28">
+        <div className="wrap space-y-12">
+          <SectionHeading eyebrow="Direction" title="Our business is steered by three commitments." />
+          <div className="grid gap-6 md:grid-cols-3">
+            {companyStory.values.map((v, i) => (
+              <article key={v.title} className="panel bg-ground p-8">
+                <span className="font-mono text-xs text-accent">0{i + 1}</span>
+                <h3 className="mt-4 text-2xl font-light text-fg">{v.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{v.body}</p>
+              </article>
+            ))}
           </div>
-          <div>
+        </div>
+      </section>
+
+      {/* Core Philosophy + Principles */}
+      <section aria-label="Core philosophy" className="border-b border-line bg-ground py-20 md:py-28">
+        <div className="wrap grid items-center gap-12 lg:grid-cols-12">
+          <div className="space-y-8 lg:col-span-6">
             <SectionHeading
-              eyebrow="Our story"
-              title="Making electric delivery work at fleet scale"
-              intro="Electric two and three wheelers are cheaper to run, but for a delivery business the battery is still the hard part: it is expensive upfront, slow to charge and hard to keep healthy. EzyEV takes that part off the operator's plate."
+              eyebrow="Core philosophy"
+              title="Making electric delivery work at fleet scale."
+              intro="Electric two and three wheelers are cheaper to operate, but the battery remains the bottleneck: expensive upfront, slow to charge, and costly to maintain. EzyEV owns that entire layer."
             />
-            <ul data-reveal className="mt-8 grid gap-2 sm:grid-cols-2">
-              {[
-                "Mobile app, IoT stations and cloud backend built in house",
-                "No staff needed at stations, just a smartphone",
-                "Designed for delivery fleets, shared mobility and logistics",
-                "Affordable for drivers, efficient for operators, better for the planet",
-              ].map((t) => (
-                <li key={t} className="rounded-2xl bg-surface p-4 text-sm text-muted">
-                  {t}
+            <ul className="space-y-4">
+              {companyStory.principles.map((p) => (
+                <li key={p.title} className="panel p-5">
+                  <h3 className="text-base font-medium text-fg">{p.title}</h3>
+                  <p className="mt-1.5 text-sm text-muted">{p.body}</p>
                 </li>
               ))}
             </ul>
           </div>
-        </div>
-      </Section>
 
-      <Section label="Mission and vision">
-        <div className="grid gap-4 md:grid-cols-3">
-          {purpose.map((p) => (
-            <article key={p.title} data-reveal className="card p-8">
-              <p.icon size="2rem" aria-hidden className="text-accent" />
-              <h2 className="mt-6 text-2xl font-semibold">{p.title}</h2>
-              <p className="mt-3 text-muted">{p.body}</p>
-            </article>
-          ))}
+          <figure className="panel overflow-hidden lg:col-span-6">
+            <picture>
+              <source
+                srcSet="/media/lifestyle/slot1-rickshaw-v2-1x.webp 1x, /media/lifestyle/slot1-rickshaw-v2-2x.webp 2x"
+                type="image/webp"
+              />
+              <img
+                src="/media/lifestyle/slot1-rickshaw-v2-1x.webp"
+                alt="Electric three-wheeler operating along a wet Indian urban street at night"
+                loading="lazy"
+                width={1920}
+                height={823}
+                className="aspect-[16/10] w-full object-cover"
+              />
+            </picture>
+          </figure>
         </div>
-      </Section>
+      </section>
 
-      <Section label="Services">
-        <SectionHeading
-          eyebrow="Services for fleets"
-          title="Everything between the plug and the rider is ours to run"
-          intro="Whether you operate twenty vehicles or a city wide network, these are the outcomes we are accountable for."
-        />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s) => (
-            <article
-              key={s.title}
-              data-reveal
-              className="card p-8 transition-transform duration-500 ease-brand hover:-translate-y-1"
-            >
-              <s.icon size="2rem" aria-hidden className="text-accent" />
-              <h3 className="mt-6 text-xl font-semibold">{s.title}</h3>
-              <p className="mt-2 text-muted">{s.body}</p>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section label="Impact">
-        <SectionHeading eyebrow="Impact so far" title="What the network has done since January 2026" />
-        <div data-reveal className="mt-12">
-          <ImpactCounters />
-        </div>
-      </Section>
-
-      <Section label="Values">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <SectionHeading eyebrow="Core values" title="The philosophy behind how we work" />
-          </div>
-          <ul className="grid gap-4 md:col-span-8">
-            {values.map((v) => (
-              <li key={v.title} data-reveal className="card flex gap-6 p-6">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-raised">
-                  <v.icon size="1.5rem" aria-hidden className="text-accent" />
-                </span>
-                <div>
-                  <h3 className="text-lg font-semibold">{v.title}</h3>
-                  <p className="mt-1 text-muted">{v.body}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
-
-      <Section label="Leadership">
-        <div data-reveal className="rounded-3xl border border-line bg-surface p-2">
-          <div className="grid gap-8 rounded-2xl bg-olive p-8 md:grid-cols-12 md:p-12">
+      {/* Leadership: Faizan Ahmed (preserved approved portrait) */}
+      <section aria-label="Leadership" className="border-b border-line bg-surface py-20 md:py-28">
+        <div className="wrap">
+          <div className="panel grid items-center gap-10 bg-ground p-8 md:grid-cols-12 md:p-12">
             <div className="md:col-span-4">
-              <p className="eyebrow">Leadership</p>
-              <div
-                aria-hidden
-                className="mt-6 flex size-24 items-center justify-center rounded-full bg-lime text-3xl font-semibold text-ink"
-              >
-                FA
+              <div className="overflow-hidden rounded-lg border border-line bg-raised">
+                <img
+                  src={companyStory.founder.image}
+                  alt="Faizan Ahmed, Founder and CEO of EzyEV Technologies"
+                  loading="lazy"
+                  width={600}
+                  height={600}
+                  className="aspect-square w-full object-cover object-top"
+                />
               </div>
-              <h2 className="mt-6 text-2xl font-semibold">Faizan Ahmed</h2>
-              <p className="text-muted">Founder and CEO</p>
             </div>
-            <div className="flex flex-col gap-4 text-lg text-muted md:col-span-8">
-              <p>
-                Faizan spent nearly two decades in sales and business development at global technology companies
-                including Oracle, Slack and SAP before founding EzyEV.
+            <div className="space-y-4 md:col-span-8">
+              <p className="eyebrow">Leadership</p>
+              <h2 className="text-3xl font-light tracking-tight text-fg md:text-4xl">
+                {companyStory.founder.name}
+              </h2>
+              <p className="font-mono text-xs tracking-wider text-accent uppercase">
+                {companyStory.founder.role}
               </p>
-              <p>
-                He started the company to deliver sustainable, cost effective energy to businesses, helping them meet
-                their environmental commitments while running their fleets more efficiently.
-              </p>
+              <div className="space-y-4 pt-2 text-base leading-relaxed text-muted">
+                {companyStory.founder.bio.map((para) => (
+                  <p key={para}>{para}</p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </Section>
+      </section>
 
-      <Section label="Cities">
-        <SectionHeading
-          eyebrow="Where we operate"
-          title="Live in Pune, Mumbai and Nagpur"
-          intro="Headquartered in Pune and expanding across tier 1 and tier 2 Indian cities."
-        />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {offices.map((o) => (
-            <article key={o.city} data-reveal className="card flex flex-col p-8">
-              <div className="flex items-center justify-between">
-                <h3 className="text-2xl font-semibold">{o.city}</h3>
-                <span className="rounded-full bg-raised px-3 py-1 text-xs font-semibold text-accent">{o.tag}</span>
-              </div>
-              <p className="mt-4 text-muted">{o.summary}</p>
-              <address className="mt-6 text-sm not-italic text-subtle">
-                {o.address.map((l) => (
-                  <span key={l} className="block">
-                    {l}
-                  </span>
-                ))}
-              </address>
-            </article>
-          ))}
+      {/* Services & Impact */}
+      <section aria-label="Fleet capabilities and impact" className="border-b border-line bg-ground py-20 md:py-28">
+        <div className="wrap space-y-16">
+          <div className="space-y-10">
+            <SectionHeading
+              eyebrow="Fleet outcomes"
+              title="Everything between the grid and the rider is ours to run."
+            />
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {platformCapabilities.map((s) => (
+                <article key={s.title} className="panel p-6">
+                  <h3 className="text-lg font-medium text-fg">{s.title}</h3>
+                  <p className="mt-2 text-sm text-muted">{s.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-8 border-t border-line pt-16">
+            <SectionHeading eyebrow="Network impact" title="Operating across three Indian cities." />
+            <ImpactCounters />
+            <div className="grid gap-4 md:grid-cols-3">
+              {offices.map((o) => (
+                <Link
+                  key={o.city}
+                  href={`/ev-battery-service/${o.slug}`}
+                  className="panel flex flex-col justify-between p-6 hover:border-accent/50"
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-medium text-fg">{o.city}</h3>
+                      <span className="font-mono text-xs text-accent">{o.tag}</span>
+                    </div>
+                    <p className="mt-3 text-sm text-muted">{o.summary}</p>
+                  </div>
+                  <address className="mt-6 font-mono text-xs not-italic text-subtle">
+                    {o.address.join(", ")}
+                  </address>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
-      </Section>
+      </section>
 
-      <CtaBand />
+      <WorkWithUsBand />
     </>
   );
 }

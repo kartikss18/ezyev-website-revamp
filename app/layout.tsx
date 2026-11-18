@@ -1,25 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { RevealObserver } from "@/components/RevealObserver";
+import { LenisProvider } from "@/components/LenisProvider";
 import { PageTransition } from "@/components/PageTransition";
 import { site } from "@/content/site";
-import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
-
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans", display: "swap" });
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "EzyEV | Battery swapping for electric 2W and 3W fleets",
+    default: "EzyEV | Clean. Connected. Charged.",
     template: "%s | EzyEV",
   },
   description: site.description,
   keywords: [
-    "battery as a service",
+    "EzyEV",
+    "Battery as a Service",
     "EV battery swapping",
     "electric 2 wheeler battery swap",
     "3 wheeler EV battery subscription",
@@ -33,21 +30,30 @@ export const metadata: Metadata = {
     locale: "en_IN",
     siteName: site.name,
     url: site.url,
-    title: "EzyEV | Battery swapping for electric 2W and 3W fleets",
+    title: "EzyEV | Clean. Connected. Charged.",
     description: site.description,
-    images: [{ url: "/og-image.jpg", width: 1200, height: 627, alt: "EzyEV. Clean. Connected. Charged." }],
+    images: [
+      {
+        url: "/media/product/og-pack.jpg",
+        width: 1200,
+        height: 630,
+        alt: "EzyEV swappable EV battery pack in anodized green and safety yellow",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@ezy_ev",
     creator: "@ezy_ev",
-    images: ["/og-image.jpg"],
+    title: "EzyEV | Clean. Connected. Charged.",
+    description: site.description,
+    images: ["/media/product/og-pack.jpg"],
   },
   alternates: { canonical: "/" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#0b0d0c",
 };
 
 const orgJsonLd = {
@@ -55,27 +61,42 @@ const orgJsonLd = {
   "@type": "Organization",
   name: site.legalName,
   url: site.url,
-  logo: `${site.url}/images/ezyev-logo.png`,
+  logo: `${site.url}/brand/ezyev-logo.svg`,
   email: site.email,
-  telephone: "+919766766576",
+  telephone: site.phoneRaw,
   sameAs: site.socials.map((s) => s.href),
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: site.phoneRaw,
+    contactType: "customer service",
+    areaServed: "IN",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en-IN"
+      data-type="tech"
+      suppressHydrationWarning
+    >
       <head>
-        {/* Marks JS as available (so reveals can start hidden) and applies a saved dark theme before paint */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <meta name="page-type" content="product" />
+        <meta name="site-kind" content="tech" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js');",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
       </head>
-      <body>
+      <body className="bg-ground text-fg antialiased">
         <a
           href="#main"
-          className="fixed top-4 left-4 z-[60] -translate-y-24 rounded-full bg-lime px-3 py-2 text-sm font-semibold text-ink transition-transform duration-500 ease-brand focus-visible:translate-y-0 focus-visible:outline-ink"
+          className="fixed top-3 left-4 z-[60] -translate-y-24 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold text-ink transition-transform duration-300 ease-brand focus-visible:translate-y-0"
         >
           Skip to content
         </a>
@@ -85,6 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <RevealObserver />
+        <LenisProvider />
         <PageTransition />
       </body>
     </html>
